@@ -48,4 +48,7 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  # Allow shorter syntax without FactoryGirl.
+  config.include FactoryGirl::Syntax::Methods
 end

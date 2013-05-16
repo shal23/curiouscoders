@@ -1,0 +1,29 @@
+<h1>Listing tutorials</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>About</th>
+    <th>Url</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tutorials.each do |tutorial| %>
+  <tr>
+    <td><%= tutorial.title %></td>
+    <td><%= tutorial.about %></td>
+    <td><%= tutorial.url %></td>
+    <td><%= tutorial.user %></td>
+    <td><%= link_to 'Show', tutorial %></td>
+    <td><%= link_to 'Edit', edit_tutorial_path(tutorial) %></td>
+    <td><%= link_to 'Destroy', tutorial, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tutorial', new_tutorial_path %>
