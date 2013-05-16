@@ -19,13 +19,29 @@ user = User.create! :name => 'Administrator',
 :password => 'password', 
 :password_confirmation => 'password'
 puts 'user: ' << user.name
-user.confirm!
+#user.confirm!
 user.add_role :admin
+
 puts 'Baron (Temp)'
 user = User.create! :name => 'BARON', 
 :email => 'dreamspacebb@gmail.com', 
 :password => 'password', 
 :password_confirmation => 'password'
 puts 'user: ' << user.name
-user.confirm!
+#user.confirm!
 user.add_role :admin
+
+puts 'TUTORIALS'
+tutorial = Tutorial.create! :title => 'Getting Started with Rails',
+	:about => '<p>This guide covers getting up and 
+		running with Ruby on Rails. After reading it, you should be familiar 
+		with:
+		<ul>
+			<li>Installing Rails, creating a new Rails application, and 
+			connecting your application to a database</li>
+			<li>The general layout of a Rails application</li>
+			<li>The basic principles of MVC (Model, View Controller) and RESTful design</li>
+			<li>How to quickly generate the starting pieces of a Rails application</li>
+		</ul>',
+	:url => 'http://guides.rubyonrails.org/getting_started.html'
+puts 'tutorial: ' << tutorial.title
