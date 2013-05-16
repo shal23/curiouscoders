@@ -33,3 +33,7 @@ gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
 group :test do
 	gem "shoulda-matchers"
 end
+
+#User profile gems
+gem 'country_select' #list of countries
+gem 'timezone' #list of timezones
