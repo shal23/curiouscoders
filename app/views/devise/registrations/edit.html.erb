@@ -2,11 +2,29 @@
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-vertical' }) do |f| %>
   <%= f.error_notification %>
   <%= display_base_errors resource %>
-  <%= f.input :name, :autofocus => true %>
+
+  <h3>Account Settings</h3>
+  <p>Change avatar</p>
+  <div class="float_clear"><%= gravatar_for @user %></div><br><%= link_to 'Change', 'http://gravatar.com/emails', :class => 'btn float_clear' %>
+  <%= f.input :name, :label => "Username", :autofocus => true %>
   <%= f.input :email, :required => true %>
   <%= f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false %>
   <%= f.input :password_confirmation, :required => false %>
+
+  <h3>Profile Settings</h3>
+  <%= f.input :firstname, :label => "First name" %>
+  <%= f.input :lastname, :label => "Surname" %>
+  <label>Country</label>
+  <%= f.country_select :location, ["Australia"] %>
+  <label>Time Zone</label>
+  <%= f.time_zone_select :time_zone, /Australia/, :default => "Sydney" %>
+  <%= f.input :school, :label => 'Education' %>
+  <%= f.input :occupation %>
+  <%= f.input :google_plus, :label => "Google+ Profile (url address)", :hint => "leave blank if you don't have one" %>
+  <%= f.input :about %>
+  <br><br>
   <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %>
+
   <%= f.button :submit, 'Update', :class => 'btn-primary' %>
 <% end %>
 <h3>Cancel my account</h3>

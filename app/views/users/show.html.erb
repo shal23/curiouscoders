@@ -1,3 +1,14 @@
-<h3>User</h3>
-<p>User: <%= @user.name %></p>
-<p>Email: <%= @user.email if @user.email %></p>
+<h1><%= @user.name %></h1>
+<h3>General</h3>
+<div class=""><%= gravatar_for @user %></div>
+<p><b>Country:</b> <%= @user.location if @user.location %></p>
+<p><b>Time Zone:</b> <%= @user.time_zone if @user.time_zone %></p>
+<p><b>Contact:</b> <%= @user.email+" (email)"if @user.email %></p>
+
+<h3>Personal Details</h3>
+<p><b>First name:</b> <%= @user.firstname if @user.firstname %></p>
+<p><b>Last name:</b> <%= @user.lastname if @user.lastname %></p>
+<p><b>Education:</b> <%= @user.school if @user.school %></p>
+<p><b>Occupation:</b> <%= @user.occupation if @user.occupation %></p>
+<p><b>Google+:</b> <%= link_to('My Profile', @user.google_plus) if @user.google_plus %></p>
+<div class=""><b>About Me:</b> <%= simple_format h(@user.about) if @user.about %></div>
