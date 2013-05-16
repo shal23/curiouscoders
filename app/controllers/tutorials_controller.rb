@@ -2,7 +2,8 @@ class TutorialsController < ApplicationController
   # GET /tutorials
   # GET /tutorials.json
   def index
-    @tutorials = Tutorial.all
+   @tutorials = Tutorial.all
+      # @tutorial = @user.tutorials.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,8 @@ class TutorialsController < ApplicationController
   # GET /tutorials/1
   # GET /tutorials/1.json
   def show
-    @tutorial = Tutorial.find(params[:id])
+   # @tutorial = Tutorial.find(params[:id])
+      @tutorial = Tutorial.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +27,7 @@ class TutorialsController < ApplicationController
   # GET /tutorials/new.json
   def new
     @tutorial = Tutorial.new
+      #@tutorial = @user.tutorials.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +44,8 @@ class TutorialsController < ApplicationController
   # POST /tutorials.json
   def create
     @tutorial = Tutorial.new(params[:tutorial])
+    #@tutorial = @user.tutorials.build(params[:tutorial])
+    @tutorial.user = current_user
 
     respond_to do |format|
       if @tutorial.save
@@ -72,7 +77,9 @@ class TutorialsController < ApplicationController
   # DELETE /tutorials/1
   # DELETE /tutorials/1.json
   def destroy
-    @tutorial = Tutorial.find(params[:id])
+    @tutorial = Tutorial.find(params[:id]) 
+    #authorize! :destroy, @user, :message => 'Not authorized as an administrator'
+    #tutorial = tutorials.find(params[:id])
     @tutorial.destroy
 
     respond_to do |format|
@@ -80,4 +87,5 @@ class TutorialsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end
