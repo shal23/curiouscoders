@@ -11,6 +11,8 @@ describe User do
     }
   end
 
+  it { should have_many(:tutorials) }
+
   it "should create a new instance given a valid attribute" do
     User.create!(@attr)
   end
