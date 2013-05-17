@@ -20,10 +20,37 @@
   <%= @tutorial.user %>
 </p>
 
+
 	<% @tutorial.tags.any? %>
   	<% @tutorial.tags.each do |tag| %>
   	<%= link_to tag.name, tagged_url(:tag => tag.name) %>
 <% end %>
+
+
+<h2>Post A Reply</h2>
+<%= simple_form_for(Post.new) do |f| %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :content %>
+    <%= f.hidden_field 'postable_id', :value => @tutorial.id %>
+    <%= f.hidden_field 'postable_type', :value => 'tutorial' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+<h2>All Posts</h2>
+<% @tutorial.posts.each do |post| %>
+	<p>Title: <%= post.title %></p>
+	<p>Posted by <%= link_to post.user.name, post.user %> on <%= post.created_at.strftime("%e %b %y") %></p>
+	<p><%= post.content %></p>
+	<hr></hr>
+
+<% end %>	
+
 
 
 <%= link_to 'Edit', edit_tutorial_path(@tutorial) %> |

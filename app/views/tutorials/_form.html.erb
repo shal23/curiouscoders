@@ -1,18 +1,12 @@
 <%= simple_form_for(@tutorial) do |f| %>
-  <%= f.error_notification %>
 
 
     <%= f.input :title, :label => "Title" %>
     <%= f.input :about, :label => "About" %>
     <%= f.input :url %>
-   
- 
-
   	<%= f.label :tags %>
 	<%= f.text_field :tag_list %>
-
 	<br>
-  
     <%= f.button :submit, :class => 'btn btn-success' %>
  
 <% end %>

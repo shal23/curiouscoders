@@ -1,4 +1,9 @@
 <h3>Home</h3>
+<h4>Users</h4>
 <% @users.each do |user| %>
   <p>User: <%=link_to user.name, user %></p>
 <% end %>
+<br>
+<br>
+<%= link_to 'Create a tutorial', new_tutorial_path, :class => "btn btn-success", :style => "color:white;" %>
+

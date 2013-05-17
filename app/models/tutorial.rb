@@ -1,6 +1,11 @@
 class Tutorial < ActiveRecord::Base
   belongs_to :user
+
   attr_accessible :about, :title, :url, :tag_list
+
+
+  has_many :posts, :as => :postable
+
 
   validates_presence_of :title, :url
 
