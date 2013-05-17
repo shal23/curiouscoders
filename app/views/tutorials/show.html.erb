@@ -10,15 +10,20 @@
   <%= @tutorial.about %>
 </p>
 
-<p>
+
   <b>Url:</b>
-  <%= @tutorial.url %>
+  <%= link_to @tutorial.url, @tutorial.url %>
 </p>
 
 <p>
   <b>User:</b>
   <%= @tutorial.user %>
 </p>
+
+	<% @tutorial.tags.any? %>
+  	<% @tutorial.tags.each do |tag| %>
+  	<%= link_to tag.name, tagged_url(:tag => tag.name) %>
+<% end %>
 
 
 <%= link_to 'Edit', edit_tutorial_path(@tutorial) %> |
