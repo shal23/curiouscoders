@@ -2,13 +2,13 @@
 <ul class="nav">
 
   <li><%= link_to 'Library', tutorials_path %></li>
-  <li><%= link_to 'Users', users_path %></li>
+  <li><%= link_to 'Teams', teams_path %></li>
 
   <% if user_signed_in? %>
     <li><%= link_to 'Edit account', edit_user_registration_path %></li>
     
     <% if current_user.has_role? :admin %>
-      <li><%= link_to 'Admin', users_path %></li>
+      <li><%= link_to 'Admin', admin_path %></li>
     <% end %>
 
     <li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
