@@ -1,7 +1,7 @@
 class Tutorial < ActiveRecord::Base
   belongs_to :user
 
-  has_many :posts, :as => :postable
+  has_many :posts, :as => :postable, :dependent => :destroy
 
   attr_accessible :about, :title, :url
 
