@@ -12,7 +12,7 @@ Curiouscoders::Application.routes.draw do
   
 
 
-
+  match 'tagged' => 'tutorials#tagged', :as => 'tagged'
   authenticated :user do
 	  root :to => 'home#index'
   end
