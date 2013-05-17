@@ -8,18 +8,20 @@ class Ability
 
     if user.has_role? :admin
       can :manage, :all
-    elsif user.has_role? :tutor
+    elsif user.has_role? :tutor #Baron please convert this to :user
       can :read, Tutorial
       can :read, User
       can :manage, Tutorial, :user_id => user.id
       can :manage, Post, :user_id => user.id
-    elsif user.has_role? :student
-      can :read, Tutorial
-      can :read, User
-      can :manage, Tutorial, :user_id => user.id
-      can :manage, Post, :user_id => user.id
+      can :manage, Team, :user_id => user.id
+      can :read, Team
+      can :edit, Team do |team|
+        team.try(:user) == user
+      end
+
     else
       can :read, Tutorial
+      can :read, Team
     end
     # Define abilities for the passed in user here. For example:
     #

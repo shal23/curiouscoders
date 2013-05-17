@@ -3,6 +3,7 @@ class TeamsController < ApplicationController
   # GET /teams.json
   def index
     @teams = Team.all
+    authorize! :index, @team, :message => 'Not authorized as an administrator.'
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +15,7 @@ class TeamsController < ApplicationController
   # GET /teams/1.json
   def show
     @team = Team.find(params[:id])
+    authorize! :read, @team, :message => 'Not authorized to do this action.'
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,6 +37,7 @@ class TeamsController < ApplicationController
   # GET /teams/1/edit
   def edit
     @team = Team.find(params[:id])
+    authorize! :edit, @team, :message => 'Not authorized to do this action.'
   end
 
   # POST /teams
