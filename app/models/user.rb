@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :memberships
   has_many :teams, :through => :memberships
 
-  has_many :posts, :as => :postable
+  has_many :posts, :as => :postable, :dependent => :destroy
 
   rolify
   # Include default devise modules. Others available are:
@@ -16,5 +16,22 @@ class User < ActiveRecord::Base
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :firstname, :lastname, :location, :time_zone, :school, :occupation, :google_plus, :about
 
-  
+  before_save { |user| user.email = email.downcase }
+
+  after_create :add_role_to_user
+
+  validates :name, :presence => true, uniqueness: { case_sensitive: false }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, :presence => true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+
+  def is_member?(team)
+    self.teams.include?(team)
+  end
+
+  private
+
+  def add_role_to_user
+    self.add_role :user
+  end
+
 end

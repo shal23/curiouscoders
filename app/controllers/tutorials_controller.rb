@@ -77,6 +77,14 @@ class TutorialsController < ApplicationController
     end
   end
 
+  def tagged
+    if params[:tag].present? 
+      @tutorials = Tutorial.tagged_with(params[:tag])
+    else 
+      @tutorials = Tutorial.tutorialall
+  end  
+end
+
   # DELETE /tutorials/1
   # DELETE /tutorials/1.json
   def destroy

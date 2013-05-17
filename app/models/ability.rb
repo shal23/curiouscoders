@@ -8,16 +8,17 @@ class Ability
 
     if user.has_role? :admin
       can :manage, :all
-    elsif user.has_role? :user #Baron please convert this to :user
+
+    elsif user.has_role? :user
       can :read, Tutorial
       can :read, User
       can :manage, Tutorial, :user_id => user.id
       can :manage, Post, :user_id => user.id
-      can :manage, Team, :user_id => user.id
+      can :manage, Team, :creator => user.id
       can :read, Team
-      can :edit, Team do |team|
-        team.try(:user) == user
-      end
+      #can :edit, Team do |team|
+      #  team.try(:user) == user
+      #end
     else
       can :read, Tutorial
       can :read, Team

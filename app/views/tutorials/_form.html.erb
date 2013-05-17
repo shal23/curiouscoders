@@ -1,10 +1,12 @@
 <%= simple_form_for(@tutorial) do |f| %>
 
- <!-- <div class="form-inputs">-->
+
     <%= f.input :title, :label => "Title" %>
     <%= f.input :about, :label => "About" %>
     <%= f.input :url %>
-
+  	<%= f.label :tags %>
+	<%= f.text_field :tag_list %>
+	<br>
     <%= f.button :submit, :class => 'btn btn-success' %>
- <!-- </div>-->
+ 
 <% end %>
