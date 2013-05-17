@@ -1,8 +1,38 @@
 class TeamsController < ApplicationController
+
+
+  def join
+    @team = Team.find(params[:id])
+    @user = User.find(params[:user])
+
+    if not @user.is_member?(@team)
+      @team.users << @user
+      flash[:notice] = "You have been added to the team"
+    else
+      flash[:error] = "You are already in this team"
+    end
+    redirect_to @team
+  end
+
+  def leave
+    @user = User.find(params[:user])
+    @team = Team.find(params[:id])
+    
+    if @user.is_member?(@team)
+      logger.info "Removing user from team #{@team.id}"
+      @user.teams.delete(@team)
+      flash[:notice] = "You have left the team"
+    else
+      flash[:error] = "You are not in this team"
+    end
+    redirect_to @team
+  end
+
   # GET /teams
   # GET /teams.json
   def index
     @teams = Team.all
+    authorize! :index, @team, :message => 'Not authorized as an administrator.'
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +44,7 @@ class TeamsController < ApplicationController
   # GET /teams/1.json
   def show
     @team = Team.find(params[:id])
+    authorize! :read, @team, :message => 'Not authorized to do this action.'
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +56,7 @@ class TeamsController < ApplicationController
   # GET /teams/new.json
   def new
     @team = Team.new
-
+    authorize! :manage, @team, :message => 'Not authorized to do this action.'
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @team }
@@ -35,12 +66,16 @@ class TeamsController < ApplicationController
   # GET /teams/1/edit
   def edit
     @team = Team.find(params[:id])
+    authorize! :edit, @team, :message => 'Not authorized to do this action.'
   end
 
   # POST /teams
   # POST /teams.json
   def create
     @team = Team.new(params[:team])
+
+    @team.users << current_user
+    @team.creator = current_user.id
 
     respond_to do |format|
       if @team.save
@@ -73,6 +108,7 @@ class TeamsController < ApplicationController
   # DELETE /teams/1.json
   def destroy
     @team = Team.find(params[:id])
+    authorize! :manage, @team, :message => 'Not authorized to do this action.'
     @team.destroy
 
     respond_to do |format|

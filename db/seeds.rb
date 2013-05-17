@@ -9,9 +9,8 @@
 # See http://railsapps.github.io/rails-environment-variables.html
 puts 'ROLES'
 Role.create([
-	{ :name => 'admin' }, 
-	{ :name => 'student' }, 
-	{ :name => 'tutor' }
+	{ :name => 'admin' },  
+	{ :name => 'user' }
 ], :without_protection => true)
 puts 'DEFAULT USERS'
 user = User.create! :name => 'Administrator', 
