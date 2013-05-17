@@ -1,4 +1,7 @@
 Curiouscoders::Application.routes.draw do
+  resources :posts
+
+
   resources :tutorials
 
 

@@ -3,6 +3,7 @@ class TutorialsController < ApplicationController
   # GET /tutorials.json
   def index
     @tutorials = Tutorial.all
+    authorize! :index, @tutorial, :message => 'Not authorized as an administrator.'
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,6 +26,7 @@ class TutorialsController < ApplicationController
   # GET /tutorials/new.json
   def new
     @tutorial = Tutorial.new
+    authorize! :manage, @tutorial, :message => 'Not authorized to do this action.'
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,12 +37,15 @@ class TutorialsController < ApplicationController
   # GET /tutorials/1/edit
   def edit
     @tutorial = Tutorial.find(params[:id])
+    authorize! :manage, @tutorial, :message => 'Not authorized to do this action.'
   end
 
   # POST /tutorials
   # POST /tutorials.json
   def create
     @tutorial = Tutorial.new(params[:tutorial])
+    authorize! :manage, @tutorial, :message => 'Not authorized to do this action.'
+    @tutorial.user = current_user
 
     respond_to do |format|
       if @tutorial.save
@@ -57,6 +62,7 @@ class TutorialsController < ApplicationController
   # PUT /tutorials/1.json
   def update
     @tutorial = Tutorial.find(params[:id])
+    authorize! :manage, @tutorial, :message => 'Not authorized to do this action.'
 
     respond_to do |format|
       if @tutorial.update_attributes(params[:tutorial])
@@ -73,6 +79,7 @@ class TutorialsController < ApplicationController
   # DELETE /tutorials/1.json
   def destroy
     @tutorial = Tutorial.find(params[:id])
+    authorize! :manage, @tutorial, :message => 'Not authorized to do this action.'
     @tutorial.destroy
 
     respond_to do |format|
