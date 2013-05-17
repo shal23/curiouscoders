@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516001650) do
+ActiveRecord::Schema.define(:version => 20130517021011) do
+
+  create_table "memberships", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+    t.integer  "team_id"
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -23,6 +30,14 @@ ActiveRecord::Schema.define(:version => 20130516001650) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "teams", :force => true do |t|
+    t.string   "name"
+    t.string   "location"
+    t.text     "about"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "tutorials", :force => true do |t|
     t.string   "title"
@@ -59,6 +74,14 @@ ActiveRecord::Schema.define(:version => 20130516001650) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "location"
+    t.string   "time_zone"
+    t.string   "google_plus"
+    t.string   "school"
+    t.string   "occupation"
+    t.text     "about"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
