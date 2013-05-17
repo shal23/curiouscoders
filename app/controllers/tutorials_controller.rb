@@ -14,7 +14,8 @@ class TutorialsController < ApplicationController
   # GET /tutorials/1
   # GET /tutorials/1.json
   def show
-    @tutorial = Tutorial.find(params[:id])
+   # @tutorial = Tutorial.find(params[:id])
+      @tutorial = Tutorial.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -45,6 +46,7 @@ class TutorialsController < ApplicationController
   def create
     @tutorial = Tutorial.new(params[:tutorial])
     authorize! :manage, @tutorial, :message => 'Not authorized to do this action.'
+
     @tutorial.user = current_user
 
     respond_to do |format|
@@ -80,6 +82,7 @@ class TutorialsController < ApplicationController
   def destroy
     @tutorial = Tutorial.find(params[:id])
     authorize! :manage, @tutorial, :message => 'Not authorized to do this action.'
+
     @tutorial.destroy
 
     respond_to do |format|
@@ -87,4 +90,5 @@ class TutorialsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end

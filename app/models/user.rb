@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_many :tutorials
+  has_many :memberships
+  has_many :teams, :through => :memberships
 
   has_many :posts, :as => :postable
 
@@ -7,7 +9,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :invitable, :database_authenticatable, :registerable, :confirmable,
+  devise :invitable, :database_authenticatable, :registerable, #:confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
