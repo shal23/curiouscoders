@@ -1,6 +1,10 @@
 Curiouscoders::Application.routes.draw do
 
+  resources :posts
+
+
   resources :teams
+
 
 
   authenticated :user do

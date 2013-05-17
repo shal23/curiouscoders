@@ -12,3 +12,27 @@
 <p><b>Occupation:</b> <%= @user.occupation if @user.occupation %></p>
 <p><b>Google+:</b> <%= link_to('My Profile', @user.google_plus) if @user.google_plus %></p>
 <div class=""><b>About Me:</b> <%= simple_format h(@user.about) if @user.about %></div>
+
+<h2>Post on <%= @user.name %>'s profile</h2>
+<%= simple_form_for(Post.new) do |f| %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :content %>
+    <%= f.hidden_field 'postable_id', :value => @user.id %>
+    <%= f.hidden_field 'postable_type', :value => 'user' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+<h2>All Replies</h2>
+<% @user.posts.each do |post| %>
+	<p>Title: <%= post.title %></p>
+	<p>Posted by <%= link_to post.user.name, post.user %> on <%= post.created_at.strftime("%e %b %y") %></p>
+	<p><%= post.content %></p>
+	<hr></hr>
+
+<% end %>	
