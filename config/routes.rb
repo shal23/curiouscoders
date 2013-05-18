@@ -1,5 +1,13 @@
 Curiouscoders::Application.routes.draw do
 
+  resources :messages do
+    member do
+      post :remove_recipient
+      post :remove_sender
+    end
+  end
+
+
   resources :posts
 
 

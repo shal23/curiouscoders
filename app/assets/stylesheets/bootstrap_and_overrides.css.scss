@@ -7,3 +7,58 @@ body {
 	background-image: url('green-fibers.png');
 	background-repeat: repeat;
 }
+
+/* MODALS (for personal messages) */
+.modal {
+	border-radius:0px;
+}
+.modal-header {
+	background-color:rgba(0,0,0,0);
+}
+.modal-header h3 {
+	color:#333;
+}
+
+form {
+	margin:0;
+}
+
+textarea {
+	width: 518px;
+	height:80px;
+}
+
+.font_weight_bold {
+	font-weight:bold;
+}
+
+.navbar .nav > li > a.nav_icon {
+	padding: 10px;
+}
+
+.navbar .nav > li > a.nav_avatar {
+	padding: 5px;
+}
+.navbar .nav > li > a.nav_avatar_text {
+	padding-left: 5px;
+}
+
+
+img.nav_avatar {
+	width:30px;
+	max-width:30px;
+	height:30px;
+	max-height:30px;
+}
+
+.float_left {
+	float:left;
+}
+
+.clear_none {
+	clear:none;
+}
+
+.navbar-inverse .brand:hover, .navbar-inverse .brand:focus {
+	color:#debb27;
+}

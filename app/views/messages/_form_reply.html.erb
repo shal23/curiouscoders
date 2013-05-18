@@ -1,0 +1,19 @@
+<%= simple_form_for(Message.new) do |f| %>
+  <div class="modal-body">
+    <div class="form-inputs">
+      <p>To: <%= link_to find_user_by_id(@message.sender_id).name, find_user_by_id(@message.sender_id) %></p>
+      <p>From: <%= link_to 'Me', current_user %></p>
+      <%= f.hidden_field 'user_id', :value => @message.sender_id %>
+      <%= f.text_field :title, :value => "RE: #{@message.title}" %>
+      <%= f.text_area :content, :autofocus => true %>
+      <%= f.hidden_field 'sender_id', :value => current_user.id %>
+      <%= f.hidden_field 'read', :value => false %>
+      <%= f.hidden_field 'show_sender', :value => true %>
+      <%= f.hidden_field 'show_recipient', :value => true %>
+    </div>
+  </div>
+  <div class="modal-footer">
+      <%= f.button :submit, :class => "btn-primary", :value => "Send" %>
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+  </div>
+<% end %>

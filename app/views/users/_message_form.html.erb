@@ -1,0 +1,25 @@
+<!-- Modal -->
+<div id="sendMessage" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="sendMessageLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="sendMessageLabel">Compose Message</h3>
+  </div>
+  <%= simple_form_for(Message.new) do |f| %>
+    <div class="modal-body">
+      <div class="form-inputs">
+        <p>To: <%= @user.name %></p>
+        <%= f.input :title %>
+        <%= f.input :content %>
+        <%= f.hidden_field 'user_id', :value => @user.id %>
+        <%= f.hidden_field 'sender_id', :value => current_user.id %>
+        <%= f.hidden_field 'read', :value => false %>
+        <%= f.hidden_field 'show_sender', :value => true %>
+        <%= f.hidden_field 'show_recipient', :value => true %>
+      </div>
+    </div>
+    <div class="modal-footer">
+        <%= f.button :submit, :class => "btn-success", :value => "Send" %>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    </div>
+  <% end %>
+</div>

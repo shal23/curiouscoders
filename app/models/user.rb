@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :tutorials
   has_many :memberships
   has_many :teams, :through => :memberships
+  has_many :messages
 
   has_many :posts, :as => :postable, :dependent => :destroy
 
