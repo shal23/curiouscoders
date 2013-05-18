@@ -1,0 +1,30 @@
+<%= link_to "<i class='icon-arrow-left icon-small'></i> Back".html_safe, messages_path, :alt => "Back", :title => "Back" %>
+
+<h1><%= @message.title %></h1>
+<hr>
+<ul style="list-style-type: none;margin-left:0">
+  <li><b>To: </b><% if @message.user_id == current_user.id %><%= link_to "Me", current_user %><% else %><%= find_user_by_id(@message.user_id).name %><% end %></li>
+  <li><b>From: </b><%= link_to find_user_by_id(@message.sender_id).name, find_user_by_id(@message.sender_id) %></li>
+</ul>
+<hr>
+
+<p>
+<%= @message.content %>
+</p>
+<br>
+<hr>
+
+
+<div class="toolbar">
+    <a href="#replyMessage" role="button" class="" data-toggle="modal"><i class="icon-mail-reply icon-small"></i> Reply</a>
+
+    <!-- Modal -->
+    <div id="replyMessage" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="replyMessageLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="replyMessageLabel">Replying to <%= find_user_by_id(@message.sender_id).name %></h3>
+      </div>
+      
+      <%= render 'form_reply' %>
+    </div>
+</div>

@@ -1,4 +1,12 @@
 <h1><%= @user.name %></h1>
+
+<hr>
+<% if !(current_user == @user) %>
+  <a href="#sendMessage" role="button" class="btn" data-toggle="modal">Message</a>
+  <%= render 'message_form' %>
+<hr>
+<% end %>
+
 <h3>General</h3>
 <div class=""><%= gravatar_for @user %></div>
 <p><b>Country:</b> <%= @user.location if @user.location %></p>
