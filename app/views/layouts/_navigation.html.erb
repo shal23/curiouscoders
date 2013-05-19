@@ -1,23 +1,32 @@
 <%= link_to "Curiouscoders", root_path, :class => 'brand' %>
 <ul class="nav">
 
-  <li><%= link_to 'Library', tutorials_path %></li>
-  <li><%= link_to 'Users', users_path %></li>
-  <li><%= link_to 'Teams', teams_path %></li>
-
+  <li><%= link_to "<i class='icon-user icon-large'></i>".html_safe, users_path, :alt => "Users", :title => "Users", :class => "nav_icon" %></li>
   <% if user_signed_in? %>
-    <li><%= link_to 'Edit account', edit_user_registration_path %></li>
-    
-    <% if current_user.has_role? :admin %>
-      <li><%= link_to 'Admin', admin_path %></li>
-    <% end %>
-
-    <li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
+    <li></i><%= link_to "<i class='icon-envelope-alt icon-large'></i>".html_safe, messages_path, :alt => "Inbox", :title => "Inbox", :class => "nav_icon" %></li>
+  <% end %>
+  <li></i><%= link_to "<i class='icon-book icon-large'></i>".html_safe, tutorials_path, :alt => "Library", :title => "Library", :class => "nav_icon" %></li>
+</ul>
+<ul class="nav" style="float:right;clear:none;">
+  <% if user_signed_in? %>
+  <li><%= link_to nav_gravatar_for(current_user), current_user, :class => "nav_avatar" %></li>
+  <li><%= link_to current_user.name, current_user, :class => "nav_avatar_text" %></li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html" alt="Settings" title="Settings">
+      <i class='icon-cogs icon-large'></i>
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+      <li><%= link_to 'Edit account', edit_user_registration_path %></li>
+      <% if current_user.has_role? :admin %>
+        <li><%= link_to 'Admin Settings', users_path %></li>
+      <% end %>
+      <li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
+    </ul>
+  </li>
 
   <% else %>
     <li><%= link_to 'Login', new_user_session_path %></li>
     <li><%= link_to 'Sign up', new_user_registration_path %></li>
-  
   <% end %>
-
 </ul>

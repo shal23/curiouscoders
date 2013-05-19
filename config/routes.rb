@@ -2,7 +2,15 @@ Curiouscoders::Application.routes.draw do
   
   devise_for :users
   resources :users 
-  resources :tutorials 
+  resources :tutorials
+
+  resources :messages do
+    member do
+      post :remove_recipient
+      post :remove_sender
+    end
+  end
+
   resources :posts
   resources :conversations
 

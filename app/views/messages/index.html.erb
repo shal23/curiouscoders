@@ -1,0 +1,47 @@
+<h1>Inbox</h1>
+
+<div class="toolbar">
+    <a href="#newMessage" role="button" class="btn btn-primary" data-toggle="modal">Compose</a>
+
+    <!-- Modal -->
+    <div id="newMessage" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newMessageLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="newMessageLabel">Compose Message</h3>
+      </div>
+      
+      <%= render 'form' %>
+    </div>
+</div>
+
+<br>
+<table class="table table-striped">
+  <tr>
+    <th>Read</th>
+    <th>From</th>
+    <th>Subject</th>
+    <th>Received</th>
+    <th></th>
+    <th>Remove?</th>
+  </tr>
+    <% @messages.each do |message| %>
+      <% if message.show_recipient %>
+          <tr>
+            <td><%= message.read %></td>
+            <td><%= find_user_by_id(message.sender_id).name %></td>
+            <% if message.read == true %>
+                <td><%= link_to message.title, message %></td>
+            <% else %>
+                <td><%= link_to message.title, message, :class => "font_weight_bold" %></td>
+            <% end %>
+            <td><%= time_ago_in_words(message.created_at) %> ago.</td>
+            <td></td>
+            <td><%= link_to 'Remove', remove_recipient_message_path(message), data: { confirm: 'Are you sure?' }, :method => :post, :class => "btn btn-mini btn-danger" %></td>
+          </tr>
+      <% end %>
+    <% end %>
+</table>
+
+<% if current_user.messages.empty? %>
+  <p>Your inbox is currently empty.</p>
+<% end %>
