@@ -5,9 +5,11 @@ class Ability
     user ||= User.new # guest user (not logged in)
     alias_action :destroy, :edit, :to => :modify
     alias_action :modify, :to => :manage
+    alias_action :index, :sent, :trash, :to => :view #Necessary to use mail inbox
 
     if user.has_role? :admin
       can :manage, :all
+      can :view, Message
     elsif user.has_role? :user
       can :read, Tutorial
       can :read, User
@@ -18,6 +20,9 @@ class Ability
       #can :edit, Team do |team|
       #  team.try(:user) == user
       #end
+      #Messages
+      can :view, Message, :user_id => user.id
+      can :view, Message, :sender_id => user.id
     else
       can :read, Tutorial
       can :read, Team

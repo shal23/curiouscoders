@@ -1,9 +1,20 @@
-<h3>Home</h3>
-<h4>Users</h4>
-<% @users.each do |user| %>
-  <p>User: <%=link_to user.name, user %></p>
-<% end %>
+<h3>Curious Coders</h3>
+
+<h4>Newest User</h4>
+  <% if @users %>
+  	<%= link_to @users.last.name, @users.last %>
+  <% end %>
+<hr>
+<h4>Newest Tutorial</h4>
+  <% if @users %>
+  	<%= link_to @tutorials.last.title, @tutorials.last %>
+  <% end %>
+<hr>
+<h4>Newest Team</h4>
+  <% if @teams %>
+  	<%= link_to @teams.last.name, @teams.last %>
+  <% end %>
 <br>
-<br>
+<hr>
 <%= link_to 'Create a tutorial', new_tutorial_path, :class => "btn btn-success", :style => "color:white;" %>
 

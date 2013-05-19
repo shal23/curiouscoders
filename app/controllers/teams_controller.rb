@@ -32,7 +32,6 @@ class TeamsController < ApplicationController
   # GET /teams.json
   def index
     @teams = Team.all
-    authorize! :index, @team, :message => 'Not authorized as an administrator.'
 
     respond_to do |format|
       format.html # index.html.erb
