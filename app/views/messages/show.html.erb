@@ -1,23 +1,59 @@
-<%= link_to "<i class='icon-arrow-left icon-small'></i> Back".html_safe, messages_path, :alt => "Back", :title => "Back" %>
+<%= link_to "<i class='icon-arrow-left icon-small'></i> Back".html_safe, inbox_path, :alt => "Back", :title => "Back" %>
 
 <h1><%= @message.title %></h1>
-<hr>
+
+<div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav">
+      <li><a href="#newMessage" role="button" data-toggle="modal"><i class="icon-edit icon-medium"></i> Compose</a></li>
+      <li><a href="#replyMessage" role="button" class="" data-toggle="modal"><i class="icon-mail-reply icon-small"></i> Reply</a></li>
+      <li><a href="#forwardMessage" role="button" class="" data-toggle="modal"><i class="icon-mail-forward icon-small"></i> Forward</a></li>
+    </ul>
+
+    <!--  -->
+    <div id="newMessage" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newMessageLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="newMessageLabel">Compose Message</h3>
+      </div>
+      
+      <%= render 'form' %>
+    </div>
+
+    <!-- Modal -->
+    <div id="forwardMessage" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="forwardMessageLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="forwardMessageLabel">Forward Message</h3>
+      </div>
+      
+      <%= render 'form_forward' %>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" style="padding-left:0;padding-right:0;">
+  <div class="row-fluid">
+    <div class="span2 background_color_white rounded_corners" style="box-shadow:0 1px 4px rgba(0, 0, 0, 0.2);padding:10px;">
+      <%= link_to "<i class='icon-inbox icon-small'></i> Inbox".html_safe, inbox_path %>
+      <br>
+      <%= link_to "<i class='icon-external-link icon-small'></i> Sent Items".html_safe, sent_path %>
+      <br>
+      <%= link_to "<i class='icon-trash icon-small'></i> Trash".html_safe, trash_path %>
+    </div>
+    <div class="span10">
+      <!--Body content-->
+
 <ul style="list-style-type: none;margin-left:0">
-  <li><b>To: </b><% if @message.user_id == current_user.id %><%= link_to "Me", current_user %><% else %><%= find_user_by_id(@message.user_id).name %><% end %></li>
+  <li><b>To: </b><% if @message.user_id == current_user.id %><%= link_to "Me", current_user %><% else %><%= link_to find_user_by_id(@message.user_id).name, find_user_by_id(@message.user_id) %><% end %></li>
   <li><b>From: </b><%= link_to find_user_by_id(@message.sender_id).name, find_user_by_id(@message.sender_id) %></li>
 </ul>
 <hr>
 
 <p>
-<%= @message.content %>
+<%= simple_format(@message.content) %>
 </p>
 <br>
-<hr>
-
-
-<div class="toolbar">
-    <a href="#replyMessage" role="button" class="" data-toggle="modal"><i class="icon-mail-reply icon-small"></i> Reply</a>
-
     <!-- Modal -->
     <div id="replyMessage" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="replyMessageLabel" aria-hidden="true">
       <div class="modal-header">
@@ -27,4 +63,8 @@
       
       <%= render 'form_reply' %>
     </div>
+</div>
+
+</div>
+</div>
 </div>

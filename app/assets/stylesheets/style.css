@@ -1,3 +1,14 @@
 .navbar-inverse .dropdown-menu li>a:hover, .navbar-inverse .dropdown-menu li>a:focus, .navbar-inverse .dropdown-submenu:hover>a {
 	/*background-color:#525252;*/
 }
+
+.background_color_white {
+	background-color:white;
+}
+.rounded_corners {
+	border-radius: 10px;
+}
+
+.font_color_yellow {
+	color:#debb27;
+}

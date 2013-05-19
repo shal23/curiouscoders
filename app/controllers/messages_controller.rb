@@ -1,5 +1,25 @@
 class MessagesController < ApplicationController
 
+  def trash
+    authorize! :trash, @message, :message => 'Need to be logged in to see this page!'
+    @messages = current_user.messages
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @messages }
+    end
+  end
+
+  def sent 
+    @messages = Message.all
+    authorize! :sent, @message, :message => 'Need to be logged in to see this page!'
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @messages }
+    end
+  end
+
   def remove_recipient
     @message = Message.find(params[:id])
     @message.show_recipient = false
@@ -24,6 +44,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
+    authorize! :trash, @message, :message => 'Need to be logged in to see this page!'
     @messages = current_user.messages
 
     respond_to do |format|
@@ -36,8 +57,10 @@ class MessagesController < ApplicationController
   # GET /messages/1.json
   def show
     @message = Message.find(params[:id])
-    @message.read = true
-    @message.save
+    if @message.user_id == current_user.id
+      @message.read = true
+      @message.save
+    end
 
     respond_to do |format|
       format.html # show.html.erb
