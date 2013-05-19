@@ -2,8 +2,13 @@
 <ul class="nav">
 
   <li><%= link_to "<i class='icon-user icon-large'></i>".html_safe, users_path, :alt => "Users", :title => "Users", :class => "nav_icon" %></li>
+  <li><%= link_to "<i class='icon-group icon-large'></i>".html_safe, teams_path, :alt => "Teams", :title => "Teams", :class => "nav_icon" %></li>
   <% if user_signed_in? %>
-    <li></i><%= link_to "<i class='icon-envelope-alt icon-large'></i>".html_safe, messages_path, :alt => "Inbox", :title => "Inbox", :class => "nav_icon" %></li>
+    <% if check_for_unread_mail() %>
+      <li></i><%= link_to "<i class='icon-envelope-alt icon-large font_color_yellow'></i>".html_safe, inbox_path, :alt => "Inbox", :title => "Inbox", :class => "nav_icon" %></li>
+    <% else %>
+      <li></i><%= link_to "<i class='icon-envelope-alt icon-large'></i>".html_safe, inbox_path, :alt => "Inbox", :title => "Inbox", :class => "nav_icon" %></li>
+    <% end %>
   <% end %>
   <li></i><%= link_to "<i class='icon-book icon-large'></i>".html_safe, tutorials_path, :alt => "Library", :title => "Library", :class => "nav_icon" %></li>
 </ul>

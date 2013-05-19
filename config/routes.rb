@@ -21,6 +21,11 @@ Curiouscoders::Application.routes.draw do
   	end
   end
   
+  #Mail paths
+  match '/inbox' => 'messages#index'
+  match '/sent' => 'messages#sent'
+  match '/trash' => 'messages#trash'
+
   match 'tagged' => 'tutorials#tagged', :as => 'tagged'
 
   authenticated :user do
