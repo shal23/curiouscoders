@@ -2,6 +2,7 @@ class TutorialsController < ApplicationController
   # GET /tutorials
   # GET /tutorials.json
   def index
+    # @tutorials = Tutorial.near(params[:search] )
     @tutorials = Tutorial.all
     authorize! :index, @tutorial, :message => 'Not authorized as an administrator.'
 
@@ -81,7 +82,7 @@ class TutorialsController < ApplicationController
     if params[:tag].present? 
       @tutorials = Tutorial.tagged_with(params[:tag])
     else 
-      @tutorials = Tutorial.tutorialall
+      @tutorials = Tutorial.all
   end  
 end
 
