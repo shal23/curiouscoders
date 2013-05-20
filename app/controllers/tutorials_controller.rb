@@ -2,6 +2,7 @@ class TutorialsController < ApplicationController
   # GET /tutorials
   # GET /tutorials.json
   def index
+    # @tutorials = Tutorial.near(params[:search] )
     @tutorials = Tutorial.all
 
     respond_to do |format|
@@ -80,7 +81,7 @@ class TutorialsController < ApplicationController
     if params[:tag].present? 
       @tutorials = Tutorial.tagged_with(params[:tag])
     else 
-      @tutorials = Tutorial.tutorialall
+      @tutorials = Tutorial.all
   end  
 end
 
