@@ -89,11 +89,12 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(params[:message])
-    @message.user_id = nil
-    if !@message.recipient_name == nil && User.find_by_name(@message.recipient_name)
-      @message.user_id = User.find_by_name(@message.recipient_name).id
-    end
 
+    if !@message.recipient_name.empty?
+      if User.find_by_name(@message.recipient_name)
+        @message.user_id = User.find_by_name(@message.recipient_name).id
+      end
+    end
 
     respond_to do |format|
       if @message.save
