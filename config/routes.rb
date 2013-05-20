@@ -1,4 +1,8 @@
 Curiouscoders::Application.routes.draw do
+  
+  devise_for :users
+  resources :users 
+  resources :tutorials
 
   resources :messages do
     member do
@@ -7,9 +11,8 @@ Curiouscoders::Application.routes.draw do
     end
   end
 
-
   resources :posts
-
+  resources :conversations
 
   resources :teams do
   	member do
@@ -24,14 +27,16 @@ Curiouscoders::Application.routes.draw do
   match '/trash' => 'messages#trash'
 
   match 'tagged' => 'tutorials#tagged', :as => 'tagged'
+
   authenticated :user do
 	  root :to => 'home#index'
   end
 
+  authenticated :admin do
+    get "admin/index", :id => "admin"
+    match "admin" => "admin#index"
+  end
+
   root :to => "home#index"
-  
-  devise_for :users
-  resources :users 
-  resources :tutorials 
   
 end
