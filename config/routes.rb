@@ -1,5 +1,8 @@
 Curiouscoders::Application.routes.draw do
   
+  get "contact/index"
+  match "contact" => "contact#index"
+
   devise_for :users
   resources :users 
   resources :tutorials
@@ -27,6 +30,8 @@ Curiouscoders::Application.routes.draw do
   match '/trash' => 'messages#trash'
 
   match 'tagged' => 'tutorials#tagged', :as => 'tagged'
+
+
 
   authenticated :user do
 	  root :to => 'home#index'
