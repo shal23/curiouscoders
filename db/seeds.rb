@@ -42,5 +42,15 @@ tutorial = Tutorial.create! :title => 'Getting Started with Rails',
 			<li>The basic principles of MVC (Model, View Controller) and RESTful design</li>
 			<li>How to quickly generate the starting pieces of a Rails application</li>
 		</ul>',
-	:url => 'http://guides.rubyonrails.org/getting_started.html'
+	:url => 'http://guides.rubyonrails.org/getting_started.html',
+	:hours => 2,
+	:paid => false
 puts 'tutorial: ' << tutorial.title
+tutorial2 = Tutorial.create! :title => 'Website Basics',
+	:about => 'Beyond HTML and CSS, there are several basic technology skills that every web 
+		professional should know. Some of these include uploading files to the web via FTP 
+		or purchasing domains and hosting.',
+	:url => 'http://teamtreehouse.com/library/websites/website-basics/website-basics',
+	:hours => 1.5,
+	:paid => true
+puts 'tutorial2: ' << tutorial2.title

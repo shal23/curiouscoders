@@ -41,3 +41,4 @@ gem 'acts-as-taggable-on', '~> 2.3.1'
 
 #Auto complete for compose message
 gem 'rails3-jquery-autocomplete'
+gem 'truncate_html'
