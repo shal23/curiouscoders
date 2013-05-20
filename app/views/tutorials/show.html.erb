@@ -1,6 +1,6 @@
 <h2><%= @tutorial.title %></h2>
 
-<p><%= @tutorial.about %></p>
+<p><%= @tutorial.about.html_safe %></p>
 <p class="lead"><%= link_to @tutorial.url, url_with_protocol(@tutorial.url) %></p>
 <% if @tutorial.tags.any? %>
 	<p>Tags: 
