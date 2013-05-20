@@ -6,7 +6,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 2.1'
 gem "thin", ">= 1.5.0"
 gem "rspec-rails", ">= 2.12.2", :group => [:development, :test]
 gem "capybara", ">= 2.0.3", :group => :test
@@ -39,4 +39,6 @@ gem 'country_select' #list of countries
 gem 'timezone' #list of timezones
 gem 'acts-as-taggable-on', '~> 2.3.1'
 
+#Auto complete for compose message
+gem 'rails3-jquery-autocomplete'
 gem 'truncate_html'

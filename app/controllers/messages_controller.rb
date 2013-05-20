@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  autocomplete :user, :name, :extra_data => [:id]
 
   def trash
     authorize! :trash, @message, :message => 'Need to be logged in to see this page!'
@@ -88,13 +89,18 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(params[:message])
+    @message.user_id = nil
+    if !@message.recipient_name == nil && User.find_by_name(@message.recipient_name)
+      @message.user_id = User.find_by_name(@message.recipient_name).id
+    end
+
 
     respond_to do |format|
       if @message.save
         format.html { redirect_to :back, notice: 'Message was successfully sent!' }
         format.json { render json: @message, status: :created, location: @message }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to :back, :flash => { :error => 'Message was not successful. Please try again.' }  }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end

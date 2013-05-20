@@ -8,6 +8,7 @@ Curiouscoders::Application.routes.draw do
   resources :tutorials
 
   resources :messages do
+    get :autocomplete_user_name, :on => :collection
     member do
       post :remove_recipient
       post :remove_sender
