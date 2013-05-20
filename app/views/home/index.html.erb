@@ -11,7 +11,7 @@
   <% end %>
 <hr>
 <h4>Newest Team</h4>
-  <% if @teams %>
+  <% unless @teams.empty? %>
   	<%= link_to @teams.last.name, @teams.last %>
   <% end %>
 <br>
