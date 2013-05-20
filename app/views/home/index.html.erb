@@ -1,12 +1,12 @@
 <h3>Curious Coders</h3>
 
 <h4>Newest User</h4>
-  <% if @users %>
+  <% unless @users.empty? %>
   	<%= link_to @users.last.name, @users.last %>
   <% end %>
 <hr>
 <h4>Newest Tutorial</h4>
-  <% if @users %>
+  <% unless @tutorials.empty? %>
   	<%= link_to @tutorials.last.title, @tutorials.last %>
   <% end %>
 <hr>
