@@ -1,5 +1,6 @@
 <%= link_to "Curiouscoders", root_path, :class => 'brand' %>
 <ul class="nav">
+
   <li><%= link_to "<i class='icon-user icon-large'></i>".html_safe, users_path, :alt => "Users", :title => "Users", :class => "nav_icon" %></li>
   <li><%= link_to "<i class='icon-group icon-large'></i>".html_safe, teams_path, :alt => "Teams", :title => "Teams", :class => "nav_icon" %></li>
   <% if user_signed_in? %>
@@ -28,6 +29,7 @@
       <li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
     </ul>
   </li>
+
   <% else %>
     <li><%= link_to 'Login', new_user_session_path %></li>
     <li><%= link_to 'Sign up', new_user_registration_path %></li>
