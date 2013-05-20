@@ -1,4 +1,19 @@
 class ConversationsController < ApplicationController
+  
+  def complete # This is a toggle
+    @conversation = Conversation.find(params[:id])
+    @team = Team.find(params[:team])
+    
+    unless @conversation.is_done?
+      @conversation.update_attributes(:done => true)
+      flash[:notice] = "The conversation has been marked complete"
+    else
+      @conversation.update_attributes(:done => false)
+      flash[:notice] = "The conversation has been marked in progress"
+    end
+    redirect_to @team
+  end
+
   # GET /conversations
   # GET /conversations.json
   def index

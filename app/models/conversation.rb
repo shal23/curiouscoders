@@ -4,4 +4,8 @@ class Conversation < ActiveRecord::Base
   has_many :posts, :as => :postable
 
   attr_accessible :team_id, :tutorial_id, :when, :where, :url, :done
+
+  def is_done?
+  	self.done
+  end
 end

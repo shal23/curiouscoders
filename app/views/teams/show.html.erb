@@ -10,7 +10,7 @@
     <% end %>
   </div>
 
-  <div class="span5">
+  <div class="span4">
     <br>
     <% @team.posts.each do |post| %>
       <p><%= post.content %></p>
@@ -27,14 +27,18 @@
           <%= f.button :submit, "Add your comment" %><br>
       <% end %>
     </div>
-    <div class="span4">
+    <div class="span5">
       <h4>Study plan</h4>
       <table class="table">
       <% @team.conversations.each do |conversation| %>
           <tr>
-            <td><%= link_to conversation.tutorial.title, conversation %></td>
-            <td><%= link_to '<i class="icon-check icon-large text-success"></i>'.html_safe, conversation, method: :delete, data: { confirm: 'Has the whole team finished this tutorial?' } %></td>
-            <td><%= link_to '<i class="icon-ban-circle icon-large text-error"></i>'.html_safe, conversation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><p class="lead"><%= link_to conversation.tutorial.title, conversation %></p></td>
+            <% unless conversation.is_done? %>
+              <td><%= link_to '<i class="icon-check-empty icon-2x muted"></i>'.html_safe, complete_conversation_path(:id => conversation.id, :team => conversation.team.id), :method => :post %></td>
+            <% else %>
+              <td><%= link_to '<i class="icon-check icon-2x text-success"></i>'.html_safe, complete_conversation_path(:id => conversation.id, :team => conversation.team.id), :method => :post %></td>
+            <% end %>
+            <td><%= link_to '<i class="icon-remove icon-2x muted"></i>'.html_safe, conversation, method: :delete, data: { confirm: 'Are you sure you want to delete this conversation?' } %></td>
           </tr>
       <% end %>
     </table>

@@ -16,7 +16,11 @@ Curiouscoders::Application.routes.draw do
   end
 
   resources :posts
-  resources :conversations
+  resources :conversations do
+    member do
+      post :complete
+    end
+  end
 
   resources :teams do
   	member do
