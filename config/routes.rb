@@ -29,6 +29,7 @@ Curiouscoders::Application.routes.draw do
   match '/inbox' => 'messages#index'
   match '/sent' => 'messages#sent'
   match '/trash' => 'messages#trash'
+  match '/admin' => 'admin#index'
 
   match 'tagged' => 'tutorials#tagged', :as => 'tagged'
 

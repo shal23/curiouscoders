@@ -1,0 +1,23 @@
+<% if @teams.empty? %>
+  <p>There are currently no teams.</p>
+<% else %>
+  <table class="table table-condensed">
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+      <th>About</th>
+      <th></th>
+      <th>Delete?</th>
+    </tr>
+
+  <% @teams.each do |team| %>
+    <tr>
+      <td><%= link_to team.name, team %></td>
+      <td><%= team.location %></td>
+      <td><%= team.about %></td>
+      <td></td>
+      <td><%= link_to 'Delete team', team, :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini' %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
