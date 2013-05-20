@@ -39,3 +39,4 @@ gem 'country_select' #list of countries
 gem 'timezone' #list of timezones
 gem 'acts-as-taggable-on', '~> 2.3.1'
 
+gem 'truncate_html'

@@ -4,9 +4,7 @@ class Tutorial < ActiveRecord::Base
 
   has_many :posts, :as => :postable, :dependent => :destroy
 
-  attr_accessible :about, :title, :url, :tag_list
-
-
+  attr_accessible :about, :title, :url, :tag_list, :paid, :hours
 
   validates_presence_of :title, :url
 

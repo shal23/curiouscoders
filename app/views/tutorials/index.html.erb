@@ -1,33 +1,18 @@
-<h2>Tutorials</h2>
+<div>
+    <h2>Tutorials</h2>
 
-<table class = "table">
-  <tr>
-    <th>Title</th>
-    <th>About</th>
-    <th>Url</th>
-    <th>Submitted on</th>
-    <!--<th>User</th>-->
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <% @tutorials.each do |tutorial| %>
+        <div>
+            <h3><%= link_to tutorial.title, tutorial %>: <%= tutorial.hours %> hours</h3>
+            <p><%= tutorial.about.html_safe %></p>
+            <p class="lead"><%= link_to tutorial.url, url_with_protocol(tutorial.url) %></p>
+            <% if tutorial.paid %>
+                <p class="text-warning">This is paid content - you'll need an account with the content provider</p>
+            <% end %>
+            <hr>
+        </div>
+    <% end %>
+    </table>
 
-<% @tutorials.each do |tutorial| %>
-  <tr>
-    
-    
-    <td><%= tutorial.title %></td>
-    <td><%= truncate(tutorial.about) %></td>
-    <td><%= tutorial.url %></td>
-    <td><%= tutorial.created_at.strftime("%e, %b, %Y") %></td>
-    <!--<td><%= tutorial.user %></td>-->
-    <!--<td><%= link_to 'Show', tutorial %></td>-->
-    <td><%= link_to 'Edit', edit_tutorial_path(tutorial) %></td>
-    <td><%= link_to 'Destroy', tutorial, method: :delete, data: { confirm: 'Are you sure?' } %>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Tutorial', new_tutorial_path %>
+    <%= link_to 'New Tutorial', new_tutorial_path, :class => "btn btn-success" %>
+</div>
