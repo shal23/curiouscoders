@@ -1,66 +1,52 @@
-<p>
-  <b>Name:</b>
-  <%= @team.name %>
-</p>
+<div class="row-fluid">
+  <div class="span3">
+    <h2><%= @team.name %></h2>
+    <p class="lead"><%= @team.location %></p>
+    <p>Started by <%= link_to find_user_by_id(@team.creator).name, find_user_by_id(@team.creator) %></p>
+    <p><%= @team.about %></p>
 
-<p>
-  <b>Creator:</b>
-  <%= find_user_by_id(@team.creator).name %>
-</p>
-
-<p>
-  <b>Location:</b>
-  <%= @team.location %>
-</p>
-
-<p>
-  <b>About:</b>
-  <%= @team.about %>
-</p>
-
-<p>
-	<b>Team members:</b>
-	<ul>
-		<% @team.users.each do |user| %>
-			<li><%= link_to user.name, user %></li>
-		<% end %>
-	</ul>
-</p>
-<br>
-<br>
-<% if user_signed_in? %>
-	<% if !current_user.is_member?(@team) %>
-		<%= link_to "Join this group", join_team_path(:user => current_user), :method => :post, :class => 'btn btn-primary' %>
-	<% else %>
-	<%= link_to "Leave this group", leave_team_path(:user => current_user), :method => :post, :class => 'btn btn-warning' %>
-	<% end %>
-<% end %>
-<br>
-<br>
-<h2>Post in <%= @team.name %></h2>
-<%= simple_form_for(Post.new) do |f| %>
-
-  <div class="form-inputs">
-    <%= f.input :content %>
-    <%= f.hidden_field 'postable_id', :value => @team.id %>
-    <%= f.hidden_field 'postable_type', :value => 'team' %>
+    <% @team.users.each do |user| %>
+    	<p><%= link_to user.name, user %></p>
+    <% end %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="span5">
+    <br>
+    <% @team.posts.each do |post| %>
+      <p><%= post.content %></p>
+      <p><%= link_to post.user.name, post.user %> on <%= post.created_at.strftime("%e %b %Y") %></p><br>
+    <% end %> 
+
+    <% if user_signed_in? %>
+      <%= simple_form_for(Post.new) do |f| %>
+        <div class="form-inputs">
+          <%= f.input :content, :label => "Post on the wall", :input_html => { :rows => 3 }, :class => "fit-width" %>
+          <%= f.hidden_field 'postable_id', :value => @team.id %>
+          <%= f.hidden_field 'postable_type', :value => 'team' %>
+        </div>
+          <%= f.button :submit, "Add your comment" %><br>
+      <% end %>
+    </div>
+    <div class="span4">
+      <h4>Study plan</h4>
+      <% @team.conversations.each do |conversation| %>
+          <p><%= link_to conversation.tutorial.title, conversation %></p>
+          <p><%= link_to 'Edit', edit_conversation_path(conversation) %></p>
+          <p><%= link_to 'Destroy', conversation, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+        </tr>
+      <% end %>
+    </div>
   </div>
+  <hr>
+
+  <% if !current_user.is_member?(@team) %>
+    <%= link_to "Join this team", join_team_path(:user => current_user), :method => :post, :class => 'btn btn-primary' %>
+  <% else %>
+  <%= link_to "Leave this team", leave_team_path(:user => current_user), :method => :post, :class => 'btn btn-warning' %>
+  <% end %>
+  <% if current_user == find_user_by_id(@team.creator) %>
+  <%= link_to 'Edit team profile', edit_team_path(@team), :class => "btn btn-primary" %> <%= link_to 'Delete team', @team, method: :delete, data: { confirm: 'Are you sure? Deleting this team is permanent and will remove all current members!' }, :class => "btn btn-danger" %>
+  <% end %>
 <% end %>
 
-<h2>All Posts</h2>
-<% @team.posts.each do |post| %>
-	<p>Posted by <%= link_to post.user.name, post.user %> on <%= post.created_at.strftime("%e %b %y") %></p>
-	<p><%= post.content %></p>
-	<hr></hr>
-
-<% end %>	
-
-
-<% if current_user == find_user_by_id(@team.creator) %>
-	<%= link_to 'Edit', edit_team_path(@team) %> | <%= link_to 'Delete Team', @team, method: :delete, data: { confirm: 'Are you sure? Deleting this team is permanent and will remove all current members!' } %> |
-<% end %>
-<%= link_to 'Back', teams_path %>
+<%= link_to 'See all teams', teams_path, :class => "btn" %>

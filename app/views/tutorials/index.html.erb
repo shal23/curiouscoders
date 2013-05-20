@@ -1,18 +1,6 @@
 <div>
     <h2>Tutorials</h2>
 
-<table class = "table">
-  <tr>
-    <th>Title</th>
-    <th>About</th>
-    <th>Url</th>
-    <th>Submitted on</th>
-    <!--<th>User</th>-->
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
     <% @tutorials.each do |tutorial| %>
         <div>
             <h3><%= link_to tutorial.title, tutorial %>: <%= tutorial.hours %> hours</h3>
@@ -25,7 +13,6 @@
         </div>
     <% end %>
     </table>
-
 
     <%= link_to 'New Tutorial', new_tutorial_path, :class => "btn btn-success" %>
 </div>

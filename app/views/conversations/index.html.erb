@@ -1,6 +1,6 @@
 <h1>Listing conversations</h1>
 
-<table>
+<table class="table table-condensed">
   <tr>
     <th>Team</th>
     <th>Tutorial</th>
@@ -11,8 +11,8 @@
 
 <% @conversations.each do |conversation| %>
   <tr>
-    <td><%= conversation.team_id %></td>
-    <td><%= conversation.tutorial_id %></td>
+    <td><%= conversation.team.name %></td>
+    <td><%= conversation.tutorial.title %></td>
     <td><%= link_to 'Show', conversation %></td>
     <td><%= link_to 'Edit', edit_conversation_path(conversation) %></td>
     <td><%= link_to 'Destroy', conversation, method: :delete, data: { confirm: 'Are you sure?' } %></td>

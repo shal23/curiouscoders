@@ -1,15 +1,30 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Team:</b>
-  <%= @conversation.team_id %>
+  <%= link_to @conversation.team.name, @conversation.team %>
 </p>
 
 <p>
   <b>Tutorial:</b>
-  <%= @conversation.tutorial_id %>
+  <%= link_to @conversation.tutorial.title, @conversation.tutorial %>
 </p>
 
+<hr>
+<h3>Comments</h3>
+<% @conversation.posts.each do |post| %>
+	<p><%= post.content %></p>
+  <p><%= link_to post.user.name, post.user %> on <%= post.created_at.strftime("%e %b %Y") %></p>
+	<hr>
+<% end %>	
 
-<%= link_to 'Edit', edit_conversation_path(@conversation) %> |
-<%= link_to 'Back', conversations_path %>
+<%= simple_form_for(Post.new) do |f| %>
+
+  <div class="form-inputs">
+    <%= f.input :content, :label => "Add your thoughts", :input_html => { :rows => 4 } %>
+    <%= f.hidden_field 'postable_id', :value => @conversation.id %>
+    <%= f.hidden_field 'postable_type', :value => 'conversation' %>
+  </div>
+    <%= f.button :submit, "Add your comment" %>
+<% end %>
+
+
+<%= link_to 'Back', conversations_path, :class => "btn" %>
