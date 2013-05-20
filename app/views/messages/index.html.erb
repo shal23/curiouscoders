@@ -40,6 +40,7 @@
     <th></th>
     <th>Remove?</th>
   </tr>
+    <% if @messages %>
     <% @messages.each do |message| %>
       <% if message.show_recipient %>
           <tr>
@@ -59,6 +60,7 @@
             <td><%= link_to 'Remove', remove_recipient_message_path(message), data: { confirm: 'Are you sure?' }, :method => :post, :class => "btn btn-mini btn-danger" %></td>
           </tr>
       <% end %>
+    <% end %>
     <% end %>
 </table>
 
