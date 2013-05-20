@@ -66,6 +66,10 @@ img.nav_avatar {
 	color:#debb27;
 }
 
+.post-footer p {
+  line-height: 90px;
+}
+
 /* CUSTOMIZE THE CAROUSEL ON HOME PAGE
     -------------------------------------------------- */
 
@@ -117,3 +121,9 @@ img.nav_avatar {
     .carousel-caption .btn {
       margin-top: 10px;
     }
+
+
+/* AUTO COMPLETE CSS */
+.ui-helper-hidden-accessible { 
+  display:none;
+}

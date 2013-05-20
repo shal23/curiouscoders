@@ -4,7 +4,6 @@ class TutorialsController < ApplicationController
   def index
     # @tutorials = Tutorial.near(params[:search] )
     @tutorials = Tutorial.all
-    authorize! :index, @tutorial, :message => 'Not authorized as an administrator.'
 
     respond_to do |format|
       format.html # index.html.erb

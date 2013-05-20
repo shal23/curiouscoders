@@ -1,57 +1,37 @@
-<p id="notice"><%= notice %></p>
+<h2><%= @tutorial.title %></h2>
 
-<p>
-  <b>Title:</b>
-  <%= @tutorial.title %>
-</p>
-
-<p>
-  <b>About:</b>
-  <%= @tutorial.about %>
-</p>
-
-
-  <b>Url:</b>
-  <%= link_to @tutorial.url, @tutorial.url %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @tutorial.user %>
-</p>
-
-
-	<% @tutorial.tags.any? %>
-  	<% @tutorial.tags.each do |tag| %>
-  	<%= link_to tag.name, tagged_url(:tag => tag.name) %>
+<p><%= @tutorial.about.html_safe %></p>
+<p class="lead"><%= link_to @tutorial.url, url_with_protocol(@tutorial.url) %></p>
+<% if @tutorial.tags.any? %>
+	<p>Tags: 
+    <% @tutorial.tags.each do |tag| %>
+    	<%= link_to tag.name, tagged_url(:tag => tag.name) %>
+    <% end %>
+  </p>
 <% end %>
 
+<% unless @tutorial.user.nil? %>
+  <p>Added by <%= link_to @tutorial.user.name, @tutorial.user %> on <%= @tutorial.created_at.strftime("%e %B %Y") %></p>
+<% end %>
 
-<h2>Post A Reply</h2>
+<%= link_to "<i class='icon-pencil icon-large'></i>&nbsp;&nbsp;Do this tutorial with your team (placeholder)".html_safe, edit_tutorial_path(@tutorial), :class => "btn btn-success" %>
+<%= link_to 'Edit', edit_tutorial_path(@tutorial), :class => "btn btn-warning" %>
+<%= link_to 'Back', tutorials_path, :class => "btn" %>
+
+<hr>
+<h3>Comments</h3>
+<% @tutorial.posts.each do |post| %>
+	<p>Posted by <%= link_to post.user.name, post.user %> on <%= post.created_at.strftime("%e %b %Y") %></p>
+	<p><%= post.content %></p>
+	<hr>
+<% end %>	
+
 <%= simple_form_for(Post.new) do |f| %>
 
   <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.input :content %>
+    <%= f.input :content, :label => "Add your thoughts" %>
     <%= f.hidden_field 'postable_id', :value => @tutorial.id %>
     <%= f.hidden_field 'postable_type', :value => 'tutorial' %>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+    <%= f.button :submit, "Add your comment" %>
 <% end %>
-
-<h2>All Posts</h2>
-<% @tutorial.posts.each do |post| %>
-	<p>Title: <%= post.title %></p>
-	<p>Posted by <%= link_to post.user.name, post.user %> on <%= post.created_at.strftime("%e %b %y") %></p>
-	<p><%= post.content %></p>
-	<hr></hr>
-
-<% end %>	
-
-
-
-<%= link_to 'Edit', edit_tutorial_path(@tutorial) %> |
-<%= link_to 'Back', tutorials_path %>
