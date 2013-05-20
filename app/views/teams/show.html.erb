@@ -29,12 +29,15 @@
     </div>
     <div class="span4">
       <h4>Study plan</h4>
+      <table class="table">
       <% @team.conversations.each do |conversation| %>
-          <p><%= link_to conversation.tutorial.title, conversation %></p>
-          <p><%= link_to 'Edit', edit_conversation_path(conversation) %></p>
-          <p><%= link_to 'Destroy', conversation, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-        </tr>
+          <tr>
+            <td><%= link_to conversation.tutorial.title, conversation %></td>
+            <td><%= link_to '<i class="icon-check icon-large text-success"></i>'.html_safe, conversation, method: :delete, data: { confirm: 'Has the whole team finished this tutorial?' } %></td>
+            <td><%= link_to '<i class="icon-ban-circle icon-large text-error"></i>'.html_safe, conversation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
       <% end %>
+    </table>
     </div>
   </div>
   <hr>

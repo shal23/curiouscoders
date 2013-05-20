@@ -90,7 +90,7 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(params[:message])
 
-    if !@message.recipient_name.empty?
+    if @message.recipient_name
       if User.find_by_name(@message.recipient_name)
         @message.user_id = User.find_by_name(@message.recipient_name).id
       end

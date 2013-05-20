@@ -1,2 +1,17 @@
 <h1>Email us</h1>
-<p></p>
+<hr>
+<%= simple_form_for(Message.new) do |f| %>
+      <p>To: Admin</p>
+      <p>From: <%= link_to current_user.name, current_user %> (me)</p>
+      <%= f.hidden_field 'user_id', :value => 1 %> <!-- Put user id of admin once complete -->
+      <%= f.input :title, :autofocus => true %>
+      <%= f.input :content %>
+      <%= f.hidden_field 'sender_id', :value => current_user.id %>
+      <%= f.hidden_field 'read', :value => false %>
+      <%= f.hidden_field 'show_sender', :value => true %>
+      <%= f.hidden_field 'show_recipient', :value => true %>
+      
+      <%= f.button :submit, :class => "btn-primary", :value => "Send" %>
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+<% end %>
+
