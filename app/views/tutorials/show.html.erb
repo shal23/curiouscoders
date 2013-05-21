@@ -14,7 +14,7 @@
   <p>Added by <%= link_to @tutorial.user.name, @tutorial.user %> on <%= @tutorial.created_at.strftime("%e %B %Y") %></p>
 <% end %>
 
-<%= link_to "<i class='icon-pencil icon-large'></i>&nbsp;&nbsp;Do this tutorial with your team (placeholder)".html_safe, edit_tutorial_path(@tutorial), :class => "btn btn-success" %>
+<%= link_to "<i class='icon-pencil icon-large'></i>&nbsp;&nbsp;Do this tutorial with your team".html_safe, new_conversation_path(:tutorial => @tutorial.id), :class => "btn btn-success" %>
 <%= link_to 'Edit', edit_tutorial_path(@tutorial), :class => "btn btn-warning" %>
 <%= link_to 'Back', tutorials_path, :class => "btn" %>
 

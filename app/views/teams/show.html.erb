@@ -3,8 +3,9 @@
     <h2><%= @team.name %></h2>
     <p class="lead"><%= @team.location %></p>
     <p>Started by <%= link_to find_user_by_id(@team.creator).name, find_user_by_id(@team.creator) %></p>
+    <h5>About</h5>
     <p><%= @team.about %></p>
-
+    <h5>Members</h5>
     <% @team.users.each do |user| %>
     	<p><%= link_to user.name, user %></p>
     <% end %>
@@ -34,11 +35,11 @@
           <tr>
             <td><p class="lead"><%= link_to conversation.tutorial.title, conversation %></p></td>
             <% unless conversation.is_done? %>
-              <td><%= link_to '<i class="icon-check-empty icon-2x muted"></i>'.html_safe, complete_conversation_path(:id => conversation.id, :team => conversation.team.id), :method => :post %></td>
+              <td><%= link_to '<i class="icon-check-empty icon-2x muted"></i>'.html_safe, complete_conversation_path(:id => conversation.id, :team => conversation.team.id), :method => :post, :title => 'Mark complete', :rel => 'tooltip', "data-placement" => "bottom" %></td>
             <% else %>
-              <td><%= link_to '<i class="icon-check icon-2x text-success"></i>'.html_safe, complete_conversation_path(:id => conversation.id, :team => conversation.team.id), :method => :post %></td>
+              <td><%= link_to '<i class="icon-check icon-2x text-success"></i>'.html_safe, complete_conversation_path(:id => conversation.id, :team => conversation.team.id), :method => :post, :title => 'Mark incomplete', :rel => 'tooltip', "data-placement" => "bottom" %></td>
             <% end %>
-            <td><%= link_to '<i class="icon-remove icon-2x muted"></i>'.html_safe, conversation, method: :delete, data: { confirm: 'Are you sure you want to delete this conversation?' } %></td>
+            <td><%= link_to '<i class="icon-remove icon-2x muted"></i>'.html_safe, conversation, method: :delete, data: { confirm: 'Are you sure you want to delete this conversation?' }, :title => 'Delete', :rel => 'tooltip', "data-placement" => "bottom" %></td>
           </tr>
       <% end %>
     </table>

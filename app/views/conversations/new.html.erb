@@ -1,5 +1,7 @@
 <h1>New conversation</h1>
 
+<p class="lead"><%= link_to @conversation.tutorial.title, @conversation.tutorial %></p>
+
 <%= render 'form' %>
 
 <%= link_to 'Back', conversations_path %>

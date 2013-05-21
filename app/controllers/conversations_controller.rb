@@ -40,6 +40,8 @@ class ConversationsController < ApplicationController
   # GET /conversations/new.json
   def new
     @conversation = Conversation.new
+    @conversation.tutorial_id = params[:tutorial]
+    @conversation.team = current_user.teams.last
 
     respond_to do |format|
       format.html # new.html.erb

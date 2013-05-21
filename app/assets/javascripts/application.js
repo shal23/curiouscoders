@@ -15,4 +15,7 @@
 //= require jquery-ui
 //= require autocomplete-rails
 //= require bootstrap
+jQuery( function($) {
+    $('a').tooltip();
+});
 //= require_tree .
