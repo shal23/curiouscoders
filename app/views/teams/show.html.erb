@@ -1,60 +1,10 @@
 <div class="row-fluid">
-  <div class="span3">
-    <h2><%= @team.name %></h2>
-    <p class="lead"><%= @team.location %></p>
-    <p>Started by <%= link_to find_user_by_id(@team.creator).name, find_user_by_id(@team.creator) %></p>
-    <h5>About</h5>
-    <p><%= @team.about %></p>
-    <h5>Members</h5>
-    <% @team.users.each do |user| %>
-    	<p><%= link_to user.name, user %></p>
-    <% end %>
-  </div>
+  <div class="span3"><%= render 'details' %></div>
+  <div class="span4"><%= render 'wall' %></div>
+  <div class="span5"><%= render 'study_plan' %></div>
+</div>
+<hr>
 
-  <div class="span4">
-    <br>
-    <% @team.posts.each do |post| %>
-      <p><%= post.content %></p>
-      <p><%= link_to post.user.name, post.user %> on <%= post.created_at.strftime("%e %b %Y") %></p><br>
-    <% end %> 
-
-    <% if user_signed_in? %>
-      <%= simple_form_for(Post.new) do |f| %>
-        <div class="form-inputs">
-          <%= f.input :content, :label => "Post on the wall", :input_html => { :rows => 3 }, :class => "fit-width" %>
-          <%= f.hidden_field 'postable_id', :value => @team.id %>
-          <%= f.hidden_field 'postable_type', :value => 'team' %>
-        </div>
-          <%= f.button :submit, "Add your comment" %><br>
-      <% end %>
-    </div>
-    <div class="span5">
-      <h4>Study plan</h4>
-      <table class="table">
-      <% @team.conversations.each do |conversation| %>
-          <tr>
-            <td><p class="lead"><%= link_to conversation.tutorial.title, conversation %></p></td>
-            <% unless conversation.is_done? %>
-              <td><%= link_to '<i class="icon-check-empty icon-2x muted"></i>'.html_safe, complete_conversation_path(:id => conversation.id, :team => conversation.team.id), :method => :post, :title => 'Mark complete', :rel => 'tooltip', "data-placement" => "bottom" %></td>
-            <% else %>
-              <td><%= link_to '<i class="icon-check icon-2x text-success"></i>'.html_safe, complete_conversation_path(:id => conversation.id, :team => conversation.team.id), :method => :post, :title => 'Mark incomplete', :rel => 'tooltip', "data-placement" => "bottom" %></td>
-            <% end %>
-            <td><%= link_to '<i class="icon-remove icon-2x muted"></i>'.html_safe, conversation, method: :delete, data: { confirm: 'Are you sure you want to delete this conversation?' }, :title => 'Delete', :rel => 'tooltip', "data-placement" => "bottom" %></td>
-          </tr>
-      <% end %>
-    </table>
-    </div>
-  </div>
-  <hr>
-
-  <% if !current_user.is_member?(@team) %>
-    <%= link_to "Join this team", join_team_path(:user => current_user), :method => :post, :class => 'btn btn-primary' %>
-  <% else %>
-  <%= link_to "Leave this team", leave_team_path(:user => current_user), :method => :post, :class => 'btn btn-warning' %>
-  <% end %>
-  <% if current_user == find_user_by_id(@team.creator) %>
-  <%= link_to 'Edit team profile', edit_team_path(@team), :class => "btn btn-primary" %> <%= link_to 'Delete team', @team, method: :delete, data: { confirm: 'Are you sure? Deleting this team is permanent and will remove all current members!' }, :class => "btn btn-danger" %>
-  <% end %>
-<% end %>
+<%= render 'options' %>
 
 <%= link_to 'See all teams', teams_path, :class => "btn" %>

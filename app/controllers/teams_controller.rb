@@ -1,6 +1,5 @@
 class TeamsController < ApplicationController
 
-
   def join
     @team = Team.find(params[:id])
     @user = User.find(params[:user])
@@ -64,8 +63,15 @@ class TeamsController < ApplicationController
 
   # GET /teams/1/edit
   def edit
+    @user = current_user #
     @team = Team.find(params[:id])
-    authorize! :edit, @team, :message => 'Not authorized to do this action.'
+    
+    if @team.has_creator?(@user)
+      authorize! :edit, @team, :message => 'Not authorized to do this action.'
+    else
+      flash[:error] = "Only the team creator can edit team profile"
+      redirect_to @team
+    end
   end
 
   # POST /teams
@@ -106,13 +112,19 @@ class TeamsController < ApplicationController
   # DELETE /teams/1
   # DELETE /teams/1.json
   def destroy
+    @user = current_user
     @team = Team.find(params[:id])
-    authorize! :manage, @team, :message => 'Not authorized to do this action.'
-    @team.destroy
+    if @team.has_creator?(@user)
+      authorize! :manage, @team, :message => 'Not authorized to do this action.'
+      @team.destroy
 
-    respond_to do |format|
-      format.html { redirect_to teams_url }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to teams_url }
+        format.json { head :no_content }
+      end
+    else
+      flash[:error] = "Only the team creator can delete the team"
+      redirect_to @team
     end
   end
 end
