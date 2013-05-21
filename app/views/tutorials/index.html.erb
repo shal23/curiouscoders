@@ -1,5 +1,16 @@
 <div>
-    <h2>Tutorials</h2>
+<h1>Search Results</h1>
+<%= @found_results.each do |tutorial| %>
+    <div>
+        <h3><%= link_to tutorial.title, tutorial %>: <%= tutorial.hours %> hours</h3>
+        <p><%= tutorial.about.html_safe %></p>
+        <p class="lead"><%= link_to tutorial.url, url_with_protocol(tutorial.url) %></p>
+        
+        <hr>
+    </div>
+<% end %>
+
+<h2>Tutorials</h2>
 
 <table class = "table">
   <tr>

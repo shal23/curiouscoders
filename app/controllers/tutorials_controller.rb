@@ -1,14 +1,44 @@
 class TutorialsController < ApplicationController
   # GET /tutorials
   # GET /tutorials.json
-  def index
-    # @tutorials = Tutorial.near(params[:search] )
-    @tutorials = Tutorial.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @tutorials }
+  #def index
+    #@tutorials = Tutorial.near(params[:search] )
+   # @tutorials = Tutorial.all
+    #@tutorials = Tutorial.search(params[:search])
+
+    #respond_to do |format|
+     # format.html # index.html.erb
+      #format.json { render json: @tutorials }
+    #end
+  #end
+
+   def index
+    @tutorials = Tutorial.all
+    #@tutorials = Tutorial.where(:user_id => current_user.id)
+    if params[:search].present?
+      @found_results = []
+      @tutorials.each do |tutorial|
+        if tutorial.tags.find_by_name(params[:search])
+          @found_results << tutorial
+        end         
+      end
+     # @search_location = Venue.create(:address => params[:search])
+      #@venues = Venue.near(params[:search], params[:radius], :order => :distance)
+      #@json = Tutorial.near(params[:search], params[:radius], :order => :distance).to_gmaps4rails
+    else
+      @venues = Tutorial.all
+      @json = Tutorial.all.to_gmaps4rails
     end
+
+
+    #respond_to do |format|
+      #format.html # index.html.erb
+      #format.json { render json: @tutorials }
+      #if params[:search].present?
+        #@search_location.destroy
+      #end
+    #end
   end
 
   # GET /tutorials/1

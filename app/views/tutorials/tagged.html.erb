@@ -2,41 +2,9 @@
 
 <%= form_tag tutorials_path, :method => :get, :class => 'form-search search-bar' do %>
     <div class="input-append">
-        <%= text_field_tag :search, params[:search], :class => 'search-query', :placeholder => 'Enter a tag' %>
+        <%= text_field_tag :search, params[:search], :class => 'search-tag', :placeholder => 'Enter a tag' %>
         <%= button_tag :class => "btn btn-primary" do %>
             Search <i class="icon-search icon-white"></i>
         <% end %>
     </div>
 <% end %>
-
-<table class = "table">
-  <tr>
-    <th>Title</th>
-    <th>About</th>
-    <th>Url</th>
-    <th>Submitted on</th>
-    <!--<th>User</th>-->
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @tutorials.each do |tutorial| %>
-  <tr>
-    
-    
-    <td><%= tutorial.title %></td>
-    <td><%= truncate(tutorial.about) %></td>
-    <td><%= tutorial.url %></td>
-    <td><%= tutorial.created_at.strftime("%e, %b, %Y") %></td>
-    <!--<td><%= tutorial.user %></td>-->
-    <!--<td><%= link_to 'Show', tutorial %></td>-->
-    <td><%= link_to 'Edit', edit_tutorial_path(tutorial) %></td>
-    <td><%= link_to 'Destroy', tutorial, method: :delete, data: { confirm: 'Are you sure?' } %>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Tutorial', new_tutorial_path %>

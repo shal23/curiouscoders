@@ -9,4 +9,5 @@ class Tutorial < ActiveRecord::Base
   validates_presence_of :title, :url
 
   acts_as_taggable_on :tags
+  
 end
