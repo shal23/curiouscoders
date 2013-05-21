@@ -1,8 +1,7 @@
 <%= simple_form_for(@tutorial) do |f| %>
 
-
     <%= f.input :title, :label => "Title" %>
-    <%= f.input :about, :label => "About" %>
+    <%= f.input :about, :label => "About", :input_html => { :rows => 4 } %>
     <%= f.input :url, :label => "Link" %>
     <%= f.input :hours, :label => "How many hours does it take to complete?" %>
     <%= f.input :paid, :as => :boolean, :label => "Does the content owner charge users for this resource?" %>

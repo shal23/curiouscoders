@@ -12,3 +12,8 @@
 .font_color_yellow {
 	color:#debb27;
 }
+
+.float_clear {
+	float:left;
+	clear:both;
+}

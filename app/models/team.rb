@@ -1,5 +1,6 @@
 class Team < ActiveRecord::Base
 	has_many :memberships
+	has_many :conversations
 	has_many :users, :through => :memberships
 
 	has_many :posts, :as => :postable, :dependent => :destroy

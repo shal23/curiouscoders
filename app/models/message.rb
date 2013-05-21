@@ -5,5 +5,5 @@ class Message < ActiveRecord::Base
 
   default_scope :order => 'created_at DESC'
 
-  validates_presence_of :user_id, :message => "Could not find user with that name."
+  validates_presence_of :user_id
 end
