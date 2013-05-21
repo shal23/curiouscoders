@@ -18,4 +18,5 @@
 jQuery( function($) {
     $('a').tooltip();
 });
+//= require bootstrap-datetimepicker
 //= require_tree .

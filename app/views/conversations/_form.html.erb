@@ -2,13 +2,12 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-	<p>Learning Rails is better with friends, so let's start a conversation!</p>
-  	<p>It's best to attempt a tutorial alone, using Google Search, Stack Overflow and any other online resources you need.  It's great to be self-reliant, but if you really get stuck, don't hesitate to start discussions before you complete the tutorial.  After everyone has given the tutorial a go, get together and discuss what made sense, what didn't or where you got stuck.</p>
     <%= f.hidden_field :tutorial_id, value: @conversation.tutorial_id %>
     <%= f.association :team, label_method: :name, value_method: :id, include_blank: false, as: :radio_buttons %>
     <%= f.input :where %>
     <%= f.input :when %>
     <%= f.input :url %>
+
     <p>Getting together online? Try <%= link_to 'Google+', 'https://plus.google.com' %> <%= link_to 'Hangout Parties', 'https://support.google.com/plus/answer/1215273?hl=en' %></p>
     <p>Getting toegether offline? Try <%= link_to 'Meetup.com', 'http://meetup.com' %></p>
   </div>
