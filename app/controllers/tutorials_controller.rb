@@ -1,14 +1,30 @@
 class TutorialsController < ApplicationController
   # GET /tutorials
   # GET /tutorials.json
-  def index
-    # @tutorials = Tutorial.near(params[:search] )
-    @tutorials = Tutorial.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @tutorials }
-    end
+  #def index
+    #@tutorials = Tutorial.near(params[:search] )
+   # @tutorials = Tutorial.all
+    #@tutorials = Tutorial.search(params[:search])
+
+    #respond_to do |format|
+     # format.html # index.html.erb
+      #format.json { render json: @tutorials }
+    #end
+  #end
+
+   def index
+    @tutorials = Tutorial.all
+    #@tutorials = Tutorial.where(:user_id => current_user.id)
+
+
+    #respond_to do |format|
+      #format.html # index.html.erb
+      #format.json { render json: @tutorials }
+      #if params[:search].present?
+        #@search_location.destroy
+      #end
+    #end
   end
 
   # GET /tutorials/1

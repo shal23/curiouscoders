@@ -6,4 +6,5 @@ class Tutorial < ActiveRecord::Base
   attr_accessible :about, :title, :url, :tag_list, :paid, :hours
   validates_presence_of :title, :url
   acts_as_taggable_on :tags
+  
 end
