@@ -1,0 +1,29 @@
+<div>
+    <h3><%= link_to tutorial.title, tutorial %>: <%= tutorial.hours %> hours</h3>
+    <p><%= tutorial.about.html_safe %></p>
+    <p class="lead"><%= link_to tutorial.url, url_with_protocol(tutorial.url) %></p>
+    <% if tutorial.paid %>
+        <p class="text-warning">Note: This is paid content - you'll need a subscription with the content provider.</p>
+    <% end %>
+
+    <% if tutorial.tags.any? %> 
+        <% tutorial.tags.each do |tag| %>
+            <%= link_to tag.name, tagged_url(:tag => tag.name), :class => 'badge' %>
+        <% end %>
+    <br><br>
+    <% end %>
+
+    <% unless tutorial.user.nil? %>
+      <p>Added by <%= link_to tutorial.user.name, tutorial.user %> on <%= tutorial.created_at.strftime("%e %B %Y") %></p>
+    <% end %>
+
+    <% unless current_user.teams.empty? %>
+      <%= link_to "<i class='icon-pencil icon-large'></i>&nbsp;&nbsp;Do this tutorial with your team".html_safe, new_conversation_path(:tutorial => tutorial.id), :class => "btn btn-success" %>
+    <% else %>
+      <%= link_to "<i class='icon-group icon-large'></i>&nbsp;&nbsp;Start or join a team".html_safe, teams_path, :class => "btn btn-primary" %>
+      <button class="btn btn-success disabled"><i class='icon-pencil icon-large'></i>&nbsp;&nbsp;Do this tutorial with your team</button>
+    <% end %>
+    <%= link_to 'Edit', edit_tutorial_path(tutorial), :class => "btn btn-warning" %>
+
+    <hr>
+</div>

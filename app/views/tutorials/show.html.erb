@@ -1,33 +1,5 @@
-<h2><%= @tutorial.title %></h2>
+<%= render :partial => @tutorial %>
 
-<p><%= @tutorial.about.html_safe %></p>
-<p class="lead"><%= link_to @tutorial.url, url_with_protocol(@tutorial.url) %></p>
-
-    <% if @tutorial.tags.any? %> 
-      <% @tutorial.tags.each do |tag| %>
-  
-    	<%= link_to tag.name, tagged_url(:tag => tag.name) %>
-    <% end %>
-  <p>Tags:
-  </p>
-<% end %>
-
-
-
-<% unless @tutorial.user.nil? %>
-  <p>Added by <%= link_to @tutorial.user.name, @tutorial.user %> on <%= @tutorial.created_at.strftime("%e %B %Y") %></p>
-<% end %>
-
-<% unless current_user.teams.empty? %>
-  <%= link_to "<i class='icon-pencil icon-large'></i>&nbsp;&nbsp;Do this tutorial with your team".html_safe, new_conversation_path(:tutorial => @tutorial.id), :class => "btn btn-success" %>
-<% else %>
-  <%= link_to "<i class='icon-group icon-large'></i>&nbsp;&nbsp;Start or join a team".html_safe, teams_path, :class => "btn btn-primary" %>
-  <button class="btn btn-success disabled"><i class='icon-pencil icon-large'></i>&nbsp;&nbsp;Do this tutorial with your team</button>
-<% end %>
-<%= link_to 'Edit', edit_tutorial_path(@tutorial), :class => "btn btn-warning" %>
-<%= link_to 'Back', tutorials_path, :class => "btn" %>
-
-<hr>
 <h3>Comments</h3>
 <% @tutorial.posts.each do |post| %>
 	<p><%= post.content %></p>
@@ -36,7 +8,6 @@
 <% end %>	
 
 <%= simple_form_for(Post.new) do |f| %>
-
   <div class="form-inputs">
     <%= f.input :content, :label => "Add your thoughts", :input_html => { :rows => 4 } %>
     <%= f.hidden_field 'postable_id', :value => @tutorial.id %>

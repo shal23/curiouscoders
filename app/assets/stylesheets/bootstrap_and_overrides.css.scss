@@ -129,7 +129,13 @@ img.nav_avatar {
   display:none;
 }
 
-.home .content div {
+.home .container div {
+  max-width: 650px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.tutorials .container div {
   max-width: 650px;
   margin-right: auto;
   margin-left: auto;
