@@ -39,14 +39,19 @@ class ConversationsController < ApplicationController
   # GET /conversations/new
   # GET /conversations/new.json
   def new
-    @conversation = Conversation.new
-    @conversation.tutorial_id = params[:tutorial]
-    @conversation.team = current_user.teams.last
+    unless current_user.teams.empty?
+      @conversation = Conversation.new
+      @conversation.tutorial_id = params[:tutorial]
+      @conversation.team = current_user.teams.last
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @conversation }
-    end
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @conversation }
+      end
+    else
+      flash[:error] = "You'll need to join or create a team first!"
+      redirect_to teams_path
+    end 
   end
 
   # GET /conversations/1/edit

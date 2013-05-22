@@ -18,7 +18,12 @@
   <p>Added by <%= link_to @tutorial.user.name, @tutorial.user %> on <%= @tutorial.created_at.strftime("%e %B %Y") %></p>
 <% end %>
 
-<%= link_to "<i class='icon-pencil icon-large'></i>&nbsp;&nbsp;Do this tutorial with your team".html_safe, new_conversation_path(:tutorial => @tutorial.id), :class => "btn btn-success" %>
+<% unless current_user.teams.empty? %>
+  <%= link_to "<i class='icon-pencil icon-large'></i>&nbsp;&nbsp;Do this tutorial with your team".html_safe, new_conversation_path(:tutorial => @tutorial.id), :class => "btn btn-success" %>
+<% else %>
+  <%= link_to "<i class='icon-group icon-large'></i>&nbsp;&nbsp;Start or join a team".html_safe, teams_path, :class => "btn btn-primary" %>
+  <button class="btn btn-success disabled"><i class='icon-pencil icon-large'></i>&nbsp;&nbsp;Do this tutorial with your team</button>
+<% end %>
 <%= link_to 'Edit', edit_tutorial_path(@tutorial), :class => "btn btn-warning" %>
 <%= link_to 'Back', tutorials_path, :class => "btn" %>
 
