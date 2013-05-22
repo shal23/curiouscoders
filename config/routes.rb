@@ -1,10 +1,10 @@
 Curiouscoders::Application.routes.draw do
-  
-  get "contact/index"
-  match "contact" => "contact#index"
 
   get "home/privacy"
   match "privacy" => "home#privacy"
+
+  get "home/contact"
+  match "contact" => "home#contact"
 
   devise_for :users
   resources :users 
