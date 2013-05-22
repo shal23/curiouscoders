@@ -6,8 +6,13 @@ Curiouscoders::Application.routes.draw do
   get "home/contact"
   match "contact" => "home#contact"
 
+  get "home/about"
+  match "about" => "home#about"
+
   get "search/index"
   match "search" => "search#index"
+
+
 
   devise_for :users
   resources :users 

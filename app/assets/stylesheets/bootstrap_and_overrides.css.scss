@@ -129,6 +129,12 @@ img.nav_avatar {
   display:none;
 }
 
+.show .container .teams div {
+  max-width: 960px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .home .container div {
   max-width: 650px;
   margin-right: auto;
@@ -137,6 +143,22 @@ img.nav_avatar {
 
 .tutorials .container div {
   max-width: 650px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.teams .index .container div {
+  max-width: 650px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.navbar div {
+  max-width: 960px;
+}
+
+.container div {
+  max-width: 960px;
   margin-right: auto;
   margin-left: auto;
 }
