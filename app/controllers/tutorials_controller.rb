@@ -16,20 +16,6 @@ class TutorialsController < ApplicationController
    def index
     @tutorials = Tutorial.all
     #@tutorials = Tutorial.where(:user_id => current_user.id)
-    if params[:search].present?
-      @found_results = []
-      @tutorials.each do |tutorial|
-        if tutorial.tags.find_by_name(params[:search])
-          @found_results << tutorial
-        end         
-      end
-     # @search_location = Venue.create(:address => params[:search])
-      #@venues = Venue.near(params[:search], params[:radius], :order => :distance)
-      #@json = Tutorial.near(params[:search], params[:radius], :order => :distance).to_gmaps4rails
-    else
-      @venues = Tutorial.all
-      @json = Tutorial.all.to_gmaps4rails
-    end
 
 
     #respond_to do |format|
