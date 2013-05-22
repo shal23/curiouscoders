@@ -1,0 +1,9 @@
+<h2><%= @team.name %></h2>
+<p class="lead"><%= @team.location %></p>
+<p>Started by <%= link_to find_user_by_id(@team.creator).name, find_user_by_id(@team.creator) %></p>
+<h5>About</h5>
+<p><%= @team.about %></p>
+<h5>Members</h5>
+<% @team.users.each do |user| %>
+	<p><%= link_to user.name, user %></p>
+<% end %>

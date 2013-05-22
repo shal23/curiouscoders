@@ -1,12 +1,8 @@
-<p>
-  <b>Team:</b>
-  <%= link_to @conversation.team.name, @conversation.team %>
-</p>
-
-<p>
-  <b>Tutorial:</b>
-  <%= link_to @conversation.tutorial.title, @conversation.tutorial %>
-</p>
+<h2><%= link_to @conversation.team.name, @conversation.team %></h2>
+<p><%= link_to @conversation.tutorial.title, @conversation.tutorial, :class => 'lead' %></p>
+<p>Where: <%= @conversation.where %></p>
+<p>When: <%= @conversation.when %></p>
+<p>Link: <%= link_to @conversation.url, url_with_protocol(@conversation.url) %></p>
 
 <hr>
 <h3>Comments</h3>

@@ -10,4 +10,8 @@ class Team < ActiveRecord::Base
 	def in_team?(user)
 	  self.users.include?(user)
 	end
+
+	def has_creator?(user)
+	  self.creator == (user.id)
+	end	
 end

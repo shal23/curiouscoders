@@ -1,0 +1,10 @@
+<% if !current_user.is_member?(@team) %>
+  <%= link_to "Join this team", join_team_path(:user => current_user), :method => :post, :class => 'btn btn-primary' %>
+<% else %>
+  <%= link_to "Leave this team", leave_team_path(:user => current_user), :method => :post, :class => 'btn btn-warning' %>
+<% end %>
+
+<% if @team.has_creator?(current_user) %>
+<%= link_to 'Edit team profile', edit_team_path(@team), :class => "btn btn-primary" %>
+<%= link_to 'Delete team', @team, method: :delete, data: { confirm: 'Are you sure? Deleting this team is permanent and will remove all current members!' }, :class => "btn btn-danger" %>
+<% end %>

@@ -40,6 +40,8 @@ class ConversationsController < ApplicationController
   # GET /conversations/new.json
   def new
     @conversation = Conversation.new
+    @conversation.tutorial_id = params[:tutorial]
+    @conversation.team = current_user.teams.last
 
     respond_to do |format|
       format.html # new.html.erb
@@ -91,7 +93,7 @@ class ConversationsController < ApplicationController
     @conversation.destroy
 
     respond_to do |format|
-      format.html { redirect_to conversations_url }
+      format.html { redirect_to tutorials_url }
       format.json { head :no_content }
     end
   end

@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import 'bootstrap-datetimepicker';
 body { padding-top: 60px; }
 @import "bootstrap-responsive";
 
@@ -27,7 +28,8 @@ form {
 }
 
 textarea {
-  min-width: 90%;
+  min-width: 95%;
+  height: 170px;
 }
 
 .font_weight_bold {
