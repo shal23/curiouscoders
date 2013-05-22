@@ -2,13 +2,17 @@
 
 <p><%= @tutorial.about.html_safe %></p>
 <p class="lead"><%= link_to @tutorial.url, url_with_protocol(@tutorial.url) %></p>
-<% if @tutorial.tags.any? %>
-	<p>Tags: 
-    <% @tutorial.tags.each do |tag| %>
+
+    <% if @tutorial.tags.any? %> 
+      <% @tutorial.tags.each do |tag| %>
+  
     	<%= link_to tag.name, tagged_url(:tag => tag.name) %>
     <% end %>
+  <p>Tags:
   </p>
 <% end %>
+
+
 
 <% unless @tutorial.user.nil? %>
   <p>Added by <%= link_to @tutorial.user.name, @tutorial.user %> on <%= @tutorial.created_at.strftime("%e %B %Y") %></p>

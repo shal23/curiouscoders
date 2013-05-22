@@ -21,12 +21,24 @@
 <br>
 <br>
 <br>
+
 <%= form_tag tutorials_path, :method => :get, :class => 'form-search search-bar' do %>
+
+<!--<div class="input-append">-->
+    <%= text_field_tag :search, params[:search], :class => 'search-query', :placeholder => 'Enter a tag' %>
+    <%= button_tag :class => "btn btn-primary" do %>
+     Search <i class="icon-search icon-white"></i>
+
+    <% end %>
+
 	<div class="input-append">
     	<%= text_field_tag :search, params[:search], :class => 'search-query', :placeholder => 'Enter a tag' %>
     	<%= button_tag :class => "btn btn-primary" do %>
      	<i class="icon-search icon-white"></i> Search
     </div>
 	<% end %>
+
 <% end %>
+
+
 
