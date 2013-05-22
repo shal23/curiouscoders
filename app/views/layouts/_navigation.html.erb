@@ -1,8 +1,14 @@
 <%= link_to "Curiouscoders", root_path, :class => 'brand' %>
 <ul class="nav">
 
-  <li><%= link_to "<i class='icon-user icon-large'></i>".html_safe, users_path, :alt => "Users", :title => "Users", :class => "nav_icon" %></li>
-  <li><%= link_to "<i class='icon-group icon-large'></i>".html_safe, teams_path, :alt => "Teams", :title => "Teams", :class => "nav_icon" %></li>
+  <li><%= link_to "<i class='icon-user icon-large'></i> Users".html_safe, users_path, :alt => "Users", :title => "Users", :class => "nav_icon" %></li>
+  <li><%= link_to "<i class='icon-group icon-large'></i> Teams".html_safe, teams_path, :alt => "Teams", :title => "Teams", :class => "nav_icon" %></li>
+  <li></i><%= link_to "<i class='icon-book icon-large'></i> Library".html_safe, tutorials_path, :alt => "Library", :title => "Library", :class => "nav_icon" %></li>
+</ul>
+<ul class="nav" style="float:right;clear:none;">
+  <% if user_signed_in? %>
+  <li><%= link_to nav_gravatar_for(current_user), current_user, :class => "nav_avatar" %></li>
+  <li><%= link_to current_user.name, current_user, :class => "nav_avatar_text" %></li>
   <% if user_signed_in? %>
     <% if check_for_unread_mail() %>
       <li></i><%= link_to "<i class='icon-envelope-alt icon-large font_color_yellow'></i>".html_safe, inbox_path, :alt => "Inbox", :title => "Inbox", :class => "nav_icon" %></li>
@@ -10,12 +16,6 @@
       <li></i><%= link_to "<i class='icon-envelope-alt icon-large'></i>".html_safe, inbox_path, :alt => "Inbox", :title => "Inbox", :class => "nav_icon" %></li>
     <% end %>
   <% end %>
-  <li></i><%= link_to "<i class='icon-book icon-large'></i>".html_safe, tutorials_path, :alt => "Library", :title => "Library", :class => "nav_icon" %></li>
-</ul>
-<ul class="nav" style="float:right;clear:none;">
-  <% if user_signed_in? %>
-  <li><%= link_to nav_gravatar_for(current_user), current_user, :class => "nav_avatar" %></li>
-  <li><%= link_to current_user.name, current_user, :class => "nav_avatar_text" %></li>
   <li class="dropdown">
     <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html" alt="Settings" title="Settings">
       <i class='icon-cogs icon-large'></i>
