@@ -26,10 +26,10 @@ class TutorialsController < ApplicationController
      # @search_location = Venue.create(:address => params[:search])
       #@venues = Venue.near(params[:search], params[:radius], :order => :distance)
       #@json = Tutorial.near(params[:search], params[:radius], :order => :distance).to_gmaps4rails
-    else
-      @venues = Tutorial.all
-      @json = Tutorial.all.to_gmaps4rails
-    end
+    #else
+     # @tutorials = Tutorial.all
+      #@json = Tutorial.all.to_gmaps4rails
+   # end
 
 
     #respond_to do |format|
@@ -39,7 +39,7 @@ class TutorialsController < ApplicationController
         #@search_location.destroy
       #end
     #end
-  end
+  #end
 
   # GET /tutorials/1
   # GET /tutorials/1.json
@@ -128,5 +128,4 @@ end
       format.json { head :no_content }
     end
   end
-
 end
