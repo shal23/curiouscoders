@@ -8,27 +8,31 @@
 
 <div class = "container" align="justify">
   <div class="span6">
-  <center><h2>Building apps is<br>
-         more fun with friends</h2></center>
-      </div>
-<div class="span3 pull-right">
-       <%= link_to 'Login', new_user_session_path, :class => "btn btn-primary", :style => "color:white;" %><br><br>
-        <%= link_to 'Sign up', new_user_registration_path, :class => "btn btn-primary", :style => "color:white;" %>
-      </div>
-</div>
-<br>
-<br>
-<br>
-<hr>
-<br>
-<br>
-<div class = "container">
-  <div class="span12">
-<center><h3>Browse our Library</h3></center>
+  <center><h3>Building apps is<br>
+         more fun with friends</h3></center>
   </div>
 </div>
 
+<div class="span3 pull-right">
+       <%= link_to 'Login', new_user_session_path, :class => "btn btn-primary", :style => "color:white;" %><br><br>
+        <%= link_to 'Sign up', new_user_registration_path, :class => "btn btn-primary", :style => "color:white;" %>
+      
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
 <hr>
+<br>
+<div class = "container">
+  <div class="span12">
+<center><h4>Browse our Library</h4></center>
+  </div>
+</div>
+<br>
+<hr>
+<br>
 <div class = "container" align="justify">
   <div class="span12">
 <h5>Basics</h5><br>
@@ -55,6 +59,9 @@
   </div>
 </div>
 <br>
+
+
+
 <!--<center>
 <%= form_tag tutorials_path, :method => :get, :class => 'form-search search-bar' do %>
 
@@ -70,44 +77,37 @@
   <% end %>
 <% end %>
 </center>-->
-<br>
-<br>
-<br>
+
 <!--<div class = "container">
   <div class="span6 pull-right">-->
 <!--<h3>Curious Coders</h3>
-=======
+
 <div class="row-fluid">
   <div class="span7"><h3>Building apps is more fun with friends.</h3><p class="lead">Join x Snails already learning to shape the web.</p></div>
   <div class="span5"><%= link_to 'Sign Up', new_user_path, :class => "btn btn-large btn-success" %></div>
 </div>
->>>>>>> upstream/master
+
 
 <h4>Newest User</h4>
   <% unless @users.empty? %>
-  	<%= link_to @users.last.name, @users.last %>
+    <%= link_to @users.last.name, @users.last %>
   <% end %>
 <hr>
 <h4>Newest Tutorial</h4>
   <% unless @tutorials.empty? %>
-  	<%= link_to @tutorials.last.title, @tutorials.last %>
+    <%= link_to @tutorials.last.title, @tutorials.last %>
   <% end %>
 <hr>
 <h4>Newest Team</h4>
   <% unless @teams.empty? %>
-  	<%= link_to @teams.last.name, @teams.last %>
+    <%= link_to @teams.last.name, @teams.last %>
   <% end %>
 <br>
-<hr>
+<hr>-->
 
-<%= link_to 'Create a tutorial', new_tutorial_path, :class => "btn btn-success", :style => "color:white;" %>
 
-  </div>
-<<<<<<< HEAD
+
+  <!--</div>
 </div>-->
-<br>
-<br>
 
-  <% end %>
-<% end %>
-
+<!--<%= link_to 'Create a tutorial', new_tutorial_path, :class => "btn btn-success", :style => "color:white;" %>-->

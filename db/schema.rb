@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520043555) do
+ActiveRecord::Schema.define(:version => 20130523031046) do
 
   create_table "conversations", :force => true do |t|
     t.integer  "team_id"
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(:version => 20130520043555) do
     t.string   "where"
     t.string   "url"
     t.boolean  "done"
+  end
+
+  create_table "feedback_forms", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.text     "message"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "memberships", :force => true do |t|

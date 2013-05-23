@@ -1,5 +1,8 @@
 Curiouscoders::Application.routes.draw do
 
+  resources :feedback_forms
+
+
   get "home/privacy"
   match "privacy" => "home#privacy"
 
@@ -11,7 +14,6 @@ Curiouscoders::Application.routes.draw do
 
   get "search/index"
   match "search" => "search#index"
-
 
 
   devise_for :users
