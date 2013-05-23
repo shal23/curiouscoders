@@ -5,11 +5,11 @@
 
   <h3>Account Settings</h3>
   <p>Change avatar</p>
-  <div class="float_clear"><%= gravatar_for @user %></div><br><%= link_to 'Change', 'http://gravatar.com/emails', :class => 'btn float_clear' %>
+  <div class="row-fluid"><%= gravatar_for @user %><br><%= link_to 'Change', 'http://gravatar.com/emails', :class => 'btn float_clear' %></div><br>
   <%= f.input :name, :label => "Username", :autofocus => true %>
   <%= f.input :email, :required => true %>
-  <%= f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false %>
-  <%= f.input :password_confirmation, :required => false %>
+  <%= f.input :password, :autocomplete => "off", :label => "New password", :required => false %>
+  <%= f.input :password_confirmation, :required => false, :label => "New password confirmation", :autocomplete => "off" %>
 
   <h3>Profile Settings</h3>
   <%= f.input :firstname, :label => "First name" %>
