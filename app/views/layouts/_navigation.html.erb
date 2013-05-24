@@ -1,24 +1,12 @@
+<div class="navbar navbar-inverse  main">
+      <nav class="navbar-inner main">
+        <div class="container">
 <%= link_to "Rails for Snails", root_path, :class => 'brand' %>
-<ul class="nav">
-
-  <li><%= link_to "<i class='icon-user icon-large'></i> Users".html_safe, users_path, :alt => "Users", :title => "Users", :class => "nav_icon" %></li>
-  <li><%= link_to "<i class='icon-group icon-large'></i> Teams".html_safe, teams_path, :alt => "Teams", :title => "Teams", :class => "nav_icon" %></li>
-  <li></i><%= link_to "<i class='icon-book icon-large'></i> Library".html_safe, tutorials_path, :alt => "Library", :title => "Library", :class => "nav_icon" %></li>
-</ul>
-<ul class="nav" style="float:right;clear:none;">
+<!-- User Details -->
+<ul class="nav main user" style="float:right;clear:none;">
   <% if user_signed_in? %>
-  <li><%= link_to nav_gravatar_for(current_user), current_user, :class => "nav_avatar" %></li>
-  <li><%= link_to current_user.name, current_user, :class => "nav_avatar_text" %></li>
-  <% if user_signed_in? %>
-    <% if check_for_unread_mail() %>
-      <li></i><%= link_to "<i class='icon-envelope-alt icon-large font_color_yellow'></i>".html_safe, inbox_path, :alt => "Inbox", :title => "Inbox", :class => "nav_icon" %></li>
-    <% else %>
-      <li></i><%= link_to "<i class='icon-envelope-alt icon-large'></i>".html_safe, inbox_path, :alt => "Inbox", :title => "Inbox", :class => "nav_icon" %></li>
-    <% end %>
-  <% end %>
-  <li class="dropdown">
-    <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html" alt="Settings" title="Settings">
-      <i class='icon-cogs icon-large'></i>
+  <li><%= link_to nav_gravatar_for(current_user), current_user, :style => "float:left;clear:none;margin-top:2px;" %><%= link_to current_user.name, current_user, :style => "float:left;clear:none;padding:8px 10px;margin-top:2px" %><p class="font_color_black" style="line-height:0;margin:0;-webkit-margin-before:0;-webkit-margin-after:0;float:left;clear:none;margin-top:19px;margin-right:3px;"> | </p><div class="dropdown" style="float:left;clear:none;margin-top:10px;">
+    <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
       <b class="caret"></b>
     </a>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -27,11 +15,50 @@
         <li><%= link_to 'Admin Settings', admin_path %></li>
       <% end %>
       <li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
-    </ul>
+    </ul></div>
   </li>
-
-  <% else %>
-    <li><%= link_to 'Login', new_user_session_path %></li>
-    <li><%= link_to 'Sign up', new_user_registration_path %></li>
+<% else %>
+    <li><%= link_to 'Sign In', new_user_session_path, :style => "float:right;clear:none;padding:8px 10px;margin-top:2px" %> %><p class="font_color_black" style="line-height:0;margin:0;-webkit-margin-before:0;-webkit-margin-after:0;float:right;clear:none;margin-top:19px;margin-right:3px;"> | </p><%= link_to 'Sign Up', new_user_registration_path, :style => "float:right;clear:none;padding:8px 10px;margin-top:2px" %> %></li>
   <% end %>
 </ul>
+
+<!-- Site Links (MAIN) -->
+<ul class="nav pull-right main" style="margin-right:20px">
+  <li></i><%= link_to "LIBRARY".html_safe, tutorials_path, :class => "font_weight_bold" %></li>
+  <li class="font_color_black">|</li>
+  <li><%= link_to "TEAMS".html_safe, teams_path, :class => "font_weight_bold" %></li>
+  <li class="font_color_black">|</li>
+  <li><%= link_to "USERS".html_safe, users_path, :class => "font_weight_bold" %></li>
+</ul>
+</div>
+</nav>
+
+<!-- Search Bar (SUB-MAIN) -->
+<nav class="navbar-inner sub">
+    <div class="container">
+      <ul class="nav pull-right">
+        <li><%= link_to "<i class='icon-user icon-large'></i>".html_safe, users_path, :alt => "Users", :title => "Users", :class => "nav_icon" %></li>
+        <li><%= link_to "<i class='icon-group icon-large'></i>".html_safe, teams_path, :alt => "Teams", :title => "Teams", :class => "nav_icon" %></li>
+        <% if user_signed_in? %>
+          <% if check_for_unread_mail() %>
+            <li></i><%= link_to "<i class='icon-envelope-alt icon-large font_color_green'></i>".html_safe, inbox_path, :alt => "Inbox", :title => "Inbox", :class => "nav_icon" %></li>
+          <% else %>
+            <li></i><%= link_to "<i class='icon-envelope-alt icon-large'></i>".html_safe, inbox_path, :alt => "Inbox", :title => "Inbox", :class => "nav_icon" %></li>
+          <% end %>
+        <% end %>
+        <li></i><%= link_to "<i class='icon-book icon-large'></i>".html_safe, tutorials_path, :alt => "Library", :title => "Library", :class => "nav_icon" %></li>
+        <li></li>
+        <li>
+          <%= form_tag search_path, :method => :get, :class => 'navbar-search form-search search-bar', :style => "margin-top:6px;margin-right:10px;" do %>
+            <div class="input-append">
+              <%= text_field_tag :search, params[:search], :class => 'search-query', :placeholder => 'Enter a tag', :style => "height:15px;" %>
+              <%= button_tag :class => "btn btn-success", :style => "height:27px;line-height:15px;border:1px black solid;padding-right:15px;" do %>
+                <i class="icon-search icon-white"></i>
+              <% end %>
+            </div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
