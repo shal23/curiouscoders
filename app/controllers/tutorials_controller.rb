@@ -16,6 +16,7 @@ class TutorialsController < ApplicationController
   def index
     @tutorials = Tutorial.all
     #@tutorials = Tutorial.where(:user_id => current_user.id)
+
     if params[:search].present?
       @found_results = []
       @tutorials.each do |tutorial|
@@ -32,7 +33,6 @@ class TutorialsController < ApplicationController
      # @tutorials = Tutorial.all
       #@json = Tutorial.all.to_gmaps4rails
    # end
-
 
     #respond_to do |format|
       #format.html # index.html.erb

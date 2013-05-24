@@ -5,3 +5,11 @@ class HomeController < ApplicationController
     @tutorials = Tutorial.all
   end
 end
+
+	def get_topic_results
+    	@found_results = []
+    	@topics.each do |topic|
+      #if tutorial.tags.find_by_name(params[:search])
+       # @found_results << tutorial
+      end         
+    end
