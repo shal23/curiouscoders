@@ -27,26 +27,25 @@
       </heading>
 
       <!-- TABS -->
+      <% if content_for?(:show_tabs) %>
       <div style="background-color:#d7d7d7;width:100%;">
         <div class="container">
-          <ul class="nav nav-tabs" style="margin-bottom:0;padding-left:50px;">
-            <li class="active">
-              <a href="#">Tutorial</a>
-            </li>
-            <li><a href="#">Teams</a></li>
-            <li><a href="#">Conversations</a></li>
+          <ul id="tabGroup" class="nav nav-tabs" style="margin-bottom:0;padding-left:50px;">
+            <li class="active"><a href="#team_details" data-toggle="tab">Details</a></li>
+            <li><a href="#team_wall" data-toggle="tab">Wall</a></li>
+            <li><a href="#team_study_plan" data-toggle="tab">Study Plan</a></li>
           </ul>
         </div>
       </div>
-
+      <% else %>
+        <div class="horizontal_line"></div>
+      <% end %>
 
       <main>
         <div class="content_main">
-          <div class="container">
-            <div class="row">
-              <%= render 'layouts/messages' %>
-              <%= yield %>
-            </div>
+          <div class="container" style="padding-top:20px;">
+            <%= render 'layouts/messages' %>
+            <%= yield %>
           </div>
         </div>
       </main>

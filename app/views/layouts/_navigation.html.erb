@@ -36,18 +36,20 @@
 <!-- Search Bar (SUB-MAIN) -->
 <nav class="navbar-inner sub">
     <div class="container">
-      <ul class="nav pull-right">
-        <li><%= link_to "<i class='icon-user icon-large'></i>".html_safe, users_path, :alt => "Users", :title => "Users", :class => "nav_icon" %></li>
-        <li><%= link_to "<i class='icon-group icon-large'></i>".html_safe, teams_path, :alt => "Teams", :title => "Teams", :class => "nav_icon" %></li>
-        <% if user_signed_in? %>
-          <% if check_for_unread_mail() %>
-            <li></i><%= link_to "<i class='icon-envelope-alt icon-large font_color_green'></i>".html_safe, inbox_path, :alt => "Inbox", :title => "Inbox", :class => "nav_icon" %></li>
-          <% else %>
-            <li></i><%= link_to "<i class='icon-envelope-alt icon-large'></i>".html_safe, inbox_path, :alt => "Inbox", :title => "Inbox", :class => "nav_icon" %></li>
-          <% end %>
+      <% if user_signed_in? %> <!-- LOGGED-IN USER SPECIFIC ICONS -->
+      <ul class="nav">
+        <% if check_for_unread_mail() %>
+          <li></i><%= link_to "<i class='icon-envelope-alt icon-large font_color_green'></i>".html_safe, inbox_path, :alt => "Mailbox", :title => "Mailbox", :class => "nav_icon" %></li>
+        <% else %>
+          <li></i><%= link_to "<i class='icon-envelope-alt icon-large'></i>".html_safe, inbox_path, :alt => "Mailbox", :title => "Mailbox", :class => "nav_icon" %></li>
         <% end %>
-        <li></i><%= link_to "<i class='icon-book icon-large'></i>".html_safe, tutorials_path, :alt => "Library", :title => "Library", :class => "nav_icon" %></li>
-        <li></li>
+        <li class="font_color_black" style="margin: 7px 10px 0;">|</li>
+        <li><%= link_to "<i class='icon-book icon-large'></i>".html_safe, new_tutorial_path, :class => "nav_icon", :alt => "Create tutorial", :title => "Create tutorial" %></li>
+        <li><%= link_to "<i class='icon-group icon-large'></i>".html_safe, new_team_path, :alt => "Create team", :title => "Create team", :class => "nav_icon" %></li>
+        <li></i><%= link_to "<i class='icon-comments icon-large'></i>".html_safe, new_conversation_path, :alt => "Create conversation", :title => "Create conversation", :class => "nav_icon" %></li>
+      </ul>
+      <% end %>
+      <ul class="nav pull-right">
         <li>
           <%= form_tag search_path, :method => :get, :class => 'navbar-search form-search search-bar', :style => "margin-top:6px;margin-right:10px;" do %>
             <div class="input-append">

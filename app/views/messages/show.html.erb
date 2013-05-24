@@ -1,10 +1,10 @@
-<%= link_to "<i class='icon-arrow-left icon-small'></i> Back".html_safe, inbox_path, :alt => "Back", :title => "Back" %>
-
-<h1><%= @message.title %></h1>
+<% content_for :title, "#{@message.title}" %>
 
 <div class="navbar">
   <div class="navbar-inner">
     <ul class="nav">
+      <li><%= link_to "<i class='icon-arrow-left icon-small'></i> Back".html_safe, inbox_path %></li>
+      <li style="margin:8px 12px 0 10px;">|</li>
       <li><a href="#newMessage" role="button" data-toggle="modal"><i class="icon-edit icon-medium"></i> Compose</a></li>
       <li><a href="#replyMessage" role="button" class="" data-toggle="modal"><i class="icon-mail-reply icon-small"></i> Reply</a></li>
       <li><a href="#forwardMessage" role="button" class="" data-toggle="modal"><i class="icon-mail-forward icon-small"></i> Forward</a></li>
@@ -32,23 +32,24 @@
   </div>
 </div>
 
-<div class="container-fluid" style="padding-left:0;padding-right:0;">
-  <div class="row-fluid">
-    <div class="span2 background_color_white rounded_corners" style="box-shadow:0 1px 4px rgba(0, 0, 0, 0.2);padding:10px;">
+  <div class="float_clear width_100">
+    <div class="content_side" style="margin-left:0;width:140px;">
+      <div class="content_box" style="width:98px;margin-top:0;">
       <%= link_to "<i class='icon-inbox icon-small'></i> Inbox".html_safe, inbox_path %>
       <br>
       <%= link_to "<i class='icon-external-link icon-small'></i> Sent Items".html_safe, sent_path %>
       <br>
       <%= link_to "<i class='icon-trash icon-small'></i> Trash".html_safe, trash_path %>
     </div>
-    <div class="span10">
+  </div>
       <!--Body content-->
 
+<div class="content margin_left_20px" style="width:800px;">
 <ul style="list-style-type: none;margin-left:0">
   <li><b>To: </b><% if @message.user_id == current_user.id %><%= link_to "Me", current_user %><% else %><%= link_to find_user_by_id(@message.user_id).name, find_user_by_id(@message.user_id) %><% end %></li>
   <li><b>From: </b><%= link_to find_user_by_id(@message.sender_id).name, find_user_by_id(@message.sender_id) %></li>
 </ul>
-<hr>
+<div class="horizontal_line"></div>
 
 <p>
 <%= simple_format(@message.content) %>
@@ -65,6 +66,4 @@
     </div>
 </div>
 
-</div>
-</div>
 </div>
