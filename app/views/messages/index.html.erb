@@ -1,73 +1,79 @@
-<h1>Inbox</h1>
+<% content_for :title, "Inbox" %>
 
-<div class="navbar">
+
+<div class="navbar" style="margin-bottom:0;"> 
   <div class="navbar-inner">
-    <ul class="nav">
-      <li><a href="#newMessage" role="button" data-toggle="modal"><i class="icon-edit icon-medium"></i> Compose</a></li>
-      <li></li>
-    </ul>
+  <ul class="nav">
+    <li><a href="#newMessage" role="button" data-toggle="modal"><i class="icon-edit icon-medium"></i> Compose</a></li>
+    <li></li>
+  </ul>
 
-    <!-- Modal -->
-    <div id="newMessage" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newMessageLabel" aria-hidden="true">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="newMessageLabel">Compose Message</h3>
-      </div>
-      
-      <%= render 'form' %>
+
+  <!-- Modal -->
+  <div id="newMessage" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newMessageLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="newMessageLabel">Compose Message</h3>
     </div>
+    
+    <%= render 'form' %>
   </div>
 </div>
+</div>
 
-<div class="container-fluid" style="padding-left:0;padding-right:0;">
-  <div class="row-fluid">
-    <div class="span2 background_color_white rounded_corners" style="box-shadow:0 1px 4px rgba(0, 0, 0, 0.2);padding:10px;">
+ <div class="float_clear width_100">
+    <div class="content_side" style="margin-left:0;width:140px;">
+      <div class="content_box" style="width:98px;">
       <%= link_to "<i class='icon-inbox icon-small'></i> Inbox".html_safe, '#', :class => "font_weight_bold" %>
       <br>
       <%= link_to "<i class='icon-external-link icon-small'></i> Sent Items".html_safe, sent_path %>
       <br>
       <%= link_to "<i class='icon-trash icon-small'></i> Trash".html_safe, trash_path %>
     </div>
-    <div class="span10">
+  </div>
+
+
+
+    <div class="content margin_left_10px">
       <!--Body content-->
+      <div class="content_box" style="width:768px;">
+            <table class="table table-condensed">
+              <tr>
+                <th></th>
+                <th>From</th>
+                <th>Subject</th>
+                <th>Received</th>
+                <th></th>
+                <th>Remove?</th>
+              </tr>
+                <% if @messages %>
+                <% @messages.each do |message| %>
+                  <% if message.show_recipient %>
+                      <tr>
+                        <% if !message.read %>
+                          <td><i class="icon-envelope icon-small"></i></td>
+                        <% else %>
+                          <td><i class="icon-eye-open icon-small"></i></td>
+                        <% end %>
+                        <td><%= find_user_by_id(message.sender_id).name %></td>
+                        <% if message.read %>
+                            <td><%= link_to message.title, message %></td>
+                        <% else %>
+                            <td><%= link_to message.title, message, :class => "font_weight_bold" %></td>
+                        <% end %>
+                        <td><%= time_ago_in_words(message.created_at) %> ago.</td>
+                        <td></td>
+                        <td><%= link_to 'Remove', remove_recipient_message_path(message), data: { confirm: 'Are you sure?' }, :method => :post, :class => "btn btn-mini btn-danger" %></td>
+                      </tr>
+                  <% end %>
+                <% end %>
+                <% end %>
+            </table>
 
-<table class="table table-striped">
-  <tr>
-    <th></th>
-    <th>From</th>
-    <th>Subject</th>
-    <th>Received</th>
-    <th></th>
-    <th>Remove?</th>
-  </tr>
-    <% if @messages %>
-    <% @messages.each do |message| %>
-      <% if message.show_recipient %>
-          <tr>
-            <% if !message.read %>
-              <td><i class="icon-envelope icon-small"></i></td>
-            <% else %>
-              <td><i class="icon-eye-open icon-small"></i></td>
+            <% if current_user.messages.empty? %>
+              <p>Your inbox is currently empty.</p>
             <% end %>
-            <td><%= find_user_by_id(message.sender_id).name %></td>
-            <% if message.read %>
-                <td><%= link_to message.title, message %></td>
-            <% else %>
-                <td><%= link_to message.title, message, :class => "font_weight_bold" %></td>
-            <% end %>
-            <td><%= time_ago_in_words(message.created_at) %> ago.</td>
-            <td></td>
-            <td><%= link_to 'Remove', remove_recipient_message_path(message), data: { confirm: 'Are you sure?' }, :method => :post, :class => "btn btn-mini btn-danger" %></td>
-          </tr>
-      <% end %>
-    <% end %>
-    <% end %>
-</table>
+          </div>
 
-<% if current_user.messages.empty? %>
-  <p>Your inbox is currently empty.</p>
-<% end %>
-
-</div>
 </div>
 </div>

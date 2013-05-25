@@ -12,6 +12,12 @@ module UsersHelper
     image_tag(gravatar_url, alt: user.name, :class => "nav_avatar")
   end
 
+  def set_gravatar_size_for(user,width,height,classes)
+    gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
+    gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}"
+    image_tag(gravatar_url, alt: user.name, :width => "#{width}", :height => "#{height}", :class => "#{classes}")
+  end
+
   def find_user_by_id(id)
   	user = User.find(id)
   	return user

@@ -1,7 +1,8 @@
 <br>
 <% @team.posts.each do |post| %>
-  <p><%= post.content %></p>
-  <p><%= link_to post.user.name, post.user %> on <%= post.created_at.strftime("%e %b %Y") %></p><br>
+  <p><%= simple_format(post.content) %></p>
+  <p><%= link_to post.user.name, post.user %> on <%= post.created_at.strftime("%e %b %Y") %></p>
+  <hr>
 <% end %> 
 
 <% if user_signed_in? %>

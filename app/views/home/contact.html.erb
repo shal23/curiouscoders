@@ -1,4 +1,4 @@
-<h1>Contact Us</h1>
+<% content_for :title, "Contact Us" %>
 
 <% if user_signed_in? %>
       <%= simple_form_for(Message.new) do |f| %>
