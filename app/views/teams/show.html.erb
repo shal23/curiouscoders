@@ -1,10 +1,25 @@
-<div class="row-fluid">
-  <div class="span3"><%= render 'details' %></div>
-  <div class="span4"><%= render 'wall' %></div>
-  <div class="span5"><%= render 'study_plan' %></div>
+<%= content_for :title, "#{@team.name}" %>
+<%= content_for :show_tabs, "true" %>
+
+<div class="navbar" style="margin-bottom:0;"> 
+  <div class="navbar-inner">
+  	<%= render 'options' %>
+  </div>
 </div>
-<hr>
 
-<%= render 'options' %>
 
-<%= link_to 'See all teams', teams_path, :class => "btn" %>
+<div id="tabGroupContent" class="tab-content">
+	<div class="tab-pane fade in active" id="team_details">
+	  <div class="content_box"><%= render 'details' %></div>
+	</div>
+	<div class="tab-pane fade" id="team_wall">
+	  <div class="content_box"><%= render 'wall' %></div>
+	</div>
+	<div class="tab-pane fade" id="team_study_plan">
+	  <div class="content_box"><%= render 'study_plan' %></div>
+	</div>
+</div>
+
+<div class="horizontal_line"></div>
+
+<%= link_to 'See all teams', teams_path %>

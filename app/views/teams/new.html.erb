@@ -1,5 +1,11 @@
-<h1>New team</h1>
+<%= content_for :title, "Teams" %>
+
+<div class="content_box">
+<h2>New team</h2>
 
 <%= render 'form' %>
+</div>
 
-<%= link_to 'Back', teams_path %>
+<div class="content_box">
+<%= link_to "<i class='icon-arrow-left icon-small'></i> Back".html_safe, teams_path %>
+</div>

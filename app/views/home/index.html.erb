@@ -1,3 +1,4 @@
+
 <br>
 <br>
 <br>
@@ -111,3 +112,57 @@
 </div>-->
 
 <!--<%= link_to 'Create a tutorial', new_tutorial_path, :class => "btn btn-success", :style => "color:white;" %>-->
+
+
+<% content_for :title, "Welcome to Rails for Snails!" %>
+
+<div class="content">
+  <div class="content_box">
+    <h3>Newest User</h3>
+    <div class="horizontal_line"></div>
+    <% unless @users.empty? %>
+      <div class="image_frame margin_top_10px">
+        <%= set_gravatar_size_for(@users.last,"100px","100px","float_left") %>
+        <div class="float_left clear_none margin_left_10px">
+          <p><b>User </b><br><%= link_to @users.last.name, @users.last %><br><b>Location</b><br><%= @users.last.location %><br><b>Timezone</b><br><%= @users.last.time_zone %></p>
+        </div>
+          <p class="float_clear margin_top_5px  "><b>About </b><br><%= @users.last.about %></p>
+      </div>
+    <% end %>
+  </div>
+  <% unless @tutorials.empty? %>
+    <div class="content_box">
+      <h4>Newest Tutorial</h4>
+    </div>
+    <div class="image_frame margin_top_10px">
+      <!-- image_tag(@tutorials.last.image) -->
+      <%= image_tag 'ruby-on-rails-tutorials.jpg', :alt => "#{@tutorials.last.title}", :width => "584", :height => "250", :class => "margin_top_10px", :style => "margin-bottom:-10px;" %>
+    </div>
+    <div class="content_box">
+      <h5><%= link_to @tutorials.last.title, @tutorials.last %></h5>
+      <p><%= simple_format(@tutorials.last.about) %></p>
+    </div>
+  <% end %>
+  <div class="content_box margin_bottom_20px">
+    <h4>Newest Team</h4>
+    <div class="horizontal_line"></div>
+    <% unless @teams.empty? %>
+    	<%= link_to @teams.last.name, @teams.last %>
+    <% end %>
+  </div>
+</div>
+<div class="content_side">
+  <div class="content_box">
+  <h3>Learning is more fun with friends!</h3>
+  <p class="lead">Sign up now.</p>
+  <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
+    <%= f.error_notification %>
+    <%= display_base_errors resource %>
+    <%= f.input :name, :autofocus => true, :required => true, :label => "Username (i.e. display name)" %>
+    <%= f.input :email, :required => true %>
+    <%= f.input :password, :required => true %>
+    <%= f.input :password_confirmation, :required => true %>
+    <%= f.button :submit, 'Sign up', :class => 'btn-success' %>
+  <% end %>
+</div>
+</div>

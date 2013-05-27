@@ -5,6 +5,7 @@
     <title><%= content_for?(:title) ? yield(:title) : "Curiouscoders" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Curiouscoders" %>">
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic' rel='stylesheet' type='text/css'>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <%= javascript_include_tag "application" %>
@@ -12,28 +13,45 @@
     <%= yield(:head) %>
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <nav class="navbar-inner">
-        <div class="container">
-          <%= render 'layouts/navigation' %>
-        </div>
-      </nav>
-    </div>
-    <div id="main" role="main">
-      <div class="container">
-        <div class="content">
-           <div class="row">
-            <div class="span12">
-              <%= render 'layouts/messages' %>
-              <%= yield %>
-            </div>
-          </div>
+    
+    <%= render 'layouts/navigation' %>
 
-          <footer>
-            <%= render 'layouts/footer' %>
-          </footer>
+    <!-- HEADER -->
+    <div id="main" role="main">
+      <heading>
+        <div class="content_heading">
+          <div class="container">
+            <%= render :partial => 'layouts/header', :locals => {:title => t(:'title')} %>
+          </div>
         </div>
-      </div> <!--! end of .container -->
-    </div> <!--! end of #main -->
+      </heading>
+
+      <!-- TABS -->
+      <% if content_for?(:show_tabs) %>
+      <div style="background-color:#d7d7d7;width:100%;">
+        <div class="container">
+          <ul id="tabGroup" class="nav nav-tabs" style="margin-bottom:0;padding-left:50px;">
+            <li class="active"><a href="#team_details" data-toggle="tab">Details</a></li>
+            <li><a href="#team_wall" data-toggle="tab">Wall</a></li>
+            <li><a href="#team_study_plan" data-toggle="tab">Study Plan</a></li>
+          </ul>
+        </div>
+      </div>
+      <% else %>
+        <div class="horizontal_line"></div>
+      <% end %>
+
+      <main>
+        <div class="content_main">
+          <div class="container" style="padding-top:20px;">
+            <%= render 'layouts/messages' %>
+            <%= yield %>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <%= render 'layouts/footer' %>
+      </footer>
   </body>
 </html>
